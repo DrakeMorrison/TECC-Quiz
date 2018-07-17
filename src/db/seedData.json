@@ -11,33 +11,68 @@
   ],
   "questions": [
     {
-      "text": "Your friend got shot in the leg, what do you do?",
+      "text": "A shooting breaks out at school, you look next to you and your friend is shot in the leg!! What do you do?",
       "scenarioId": 1,
-      "pointValue": 23,
-      "questionNum": 3
+      "pointValue": 10,
+      "questionNum": 1
     },
     {
-      "text": "Your efforts are unsuccessful, what to you do?",
+      "text": "You look down, and your friend is bleeding out! What do you do?",
       "scenarioId": 1,
-      "pointValue": 25,
+      "pointValue": 20,
       "questionNum": 2
     },
     {
-      "text": "Your efforts are unsuccessful, what to you do?",
+      "text": "You look around and hear more gunshots, do you drag your friend outside? Or stay put and hope the shooter doesn't find you?",
       "scenarioId": 1,
-      "pointValue": 23,
-      "questionNum": 1
+      "pointValue": 30,
+      "questionNum": 3
     }
   ],
   "answers": [
     {
-      "questionId": "-Laoie",
-      "answerText": "Tie a Tourniquet around their leg",
+      "questionId": 0,
+      "answerText": "Drag your friend away from the shooting and behind a concrete wall",
       "isCorrect": true
     },
     {
-      "questionId": "-Laoieah",
-      "answerText": "Run away",
+      "questionId": 0,
+      "answerText": "Leave your friend and run away as fast as possible",
+      "isCorrect": false
+    },
+    {
+      "questionId": 0,
+      "answerText": "Drop down where you are and help your friend.",
+      "isCorrect": false
+    },
+    {
+      "questionId": 1,
+      "answerText": "Run out to get help",
+      "isCorrect": false
+    },
+    {
+      "questionId": 1,
+      "answerText": "Take off your belt and tighten it above the wound on your friend's leg to stop the bleeding.",
+      "isCorrect": true
+    },
+    {
+      "questionId": 1,
+      "answerText": "Call out for help while staying with your friend.",
+      "isCorrect": false
+    },
+    {
+      "questionId": 2,
+      "answerText": "Stay put and hope the shooter doesn't find you.",
+      "isCorrect": false
+    },
+    {
+      "questionId": 2,
+      "answerText": "Drag your friend outside when the coast is clear.",
+      "isCorrect": true
+    },
+    {
+      "questionId": 2,
+      "answerText": "Leave your friend inside while you go outside for help.",
       "isCorrect": false
     }
   ],
@@ -45,31 +80,31 @@
     {
       "name": "Local Hero",
       "icon": "http://www.crazyimage.com",
-      "pointValue": 23,
+      "pointValue": 60,
       "pointAward": true,
       "numSaved": null
     }
   ],
   "game": [
     {
-      "creationTime": 2637382,
+      "creationTime": 1531860050625,
       "points": 2354,
-      "scnenarioId": "-La;slekha;oihs",
+      "scnenarioId": 0,
       "isSaved": false,
-      "finalTime": 13432523,
-      "uid": "123uid"
+      "finalTime": 1531860064951,
+      "uid": "uGnsFD0n2qOcGa85cKvEEAwoARA3"
     }
   ],
   "gameQuestions": [
     {
-      "gameId": "-La;lskdf",
-      "questionId": "-Laoiejdls",
+      "gameId": 0,
+      "questionId": 0,
       "isComplete": true
     }
   ],
   "scenarios": [
     {
-      "name": "scenario 1"
+      "name": "School Shooting"
     }
   ]
 }
