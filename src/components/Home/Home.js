@@ -1,10 +1,17 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 class Home extends React.Component {
   render () {
     return (
       <div className='Home'>
-        <h2>Home</h2>
+        <div class="jumbotron">
+          <h1>Friend Savior</h1>
+          <p>Save your friends in this exciting game by testing your medical first-aid skills!</p>
+          <p><Link className='btn btn-lg btn-primary' to='/login'>Login</Link></p>
+          <p>Or</p>
+          <p><Link to='/register' className='btn btn-lg btn-success'>Register</Link></p>
+        </div>
       </div>
     );
   };
