@@ -99,6 +99,7 @@ class App extends Component {
                   path='/menu'
                   authed={this.state.authed}
                   component={Menu}
+                  runAway={this.runAway}
                 />
                 <PrivateRoute
                   path='/game/:id'

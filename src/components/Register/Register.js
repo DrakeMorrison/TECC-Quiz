@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import authRequests from '../../firebaseRequests/auth';
-// import friendRequests from '../../firebaseRequests/friends';
+import friendRequests from '../../firebaseRequests/friends';
 
 import './Register.css';
 
@@ -24,13 +24,17 @@ class Register extends React.Component {
     authRequests
       .registerUser(user)
       .then(() => {
-        this.props.history.push('/menu');
+        const friend = {};
+        friend.uid = authRequests.getUid();
+        friend.name = this.state.user.friendName;
+
+        friendRequests
+          .postRequest(friend)
+          .then(() => {
+            this.props.history.push('/menu');
+          });
       })
       .catch(console.error.bind(console));
-    // friendRequests
-    //   .postRequest()
-    //   .then()
-    //   .catch(console.error.bind(console));
   };
 
   emailChange = e => {
