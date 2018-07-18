@@ -4,7 +4,7 @@ import constants from '../constants';
 const getRequest = () => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/game.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/answers.json`)
       .then(res => {
         const stuff = [];
         if (res.data !== null) {
@@ -21,17 +21,4 @@ const getRequest = () => {
   });
 };
 
-const postRequest = (game) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(`${constants.firebaseConfig.databaseURL}/game.json`, game)
-      .then(res => {
-        resolve(res);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-};
-
-export default { getRequest, postRequest };
+export default { getRequest };

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import constants from '../constants';
 
-const getRequest = () => {
+const getByScenarioRequest = (scenarioId) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/game.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/questions.json?orderBy="scenarioId"&equalTo=${scenarioId}`)
       .then(res => {
         const stuff = [];
         if (res.data !== null) {
@@ -21,17 +21,4 @@ const getRequest = () => {
   });
 };
 
-const postRequest = (game) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .post(`${constants.firebaseConfig.databaseURL}/game.json`, game)
-      .then(res => {
-        resolve(res);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-};
-
-export default { getRequest, postRequest };
+export default { getByScenarioRequest };

@@ -59,8 +59,8 @@ class Menu extends React.Component {
         </div>
         <div className='col-xs-4'>
           <h2>Menu</h2>
-          <Link className='btn btn-primary' to='/game'>Scenario 1</Link>
-          <Link className='btn btn-primary' to='/game'>Scenario 2</Link>
+          <Link className='btn btn-primary' to='/game/1'>Scenario 1</Link>
+          <Link className='btn btn-primary' to='/game/2'>Scenario 2</Link>
           <button className='btn btn-danger' onClick={logoutClickEvent}>Logout</button>
         </div>
         <div className='col-xs-4 menu-games'>
