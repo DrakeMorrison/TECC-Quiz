@@ -102,7 +102,7 @@ class App extends Component {
                   runAway={this.runAway}
                 />
                 <PrivateRoute
-                  path='/game/:id'
+                  path='/game/:scenario'
                   authed={this.state.authed}
                   component={Game}
                 />
