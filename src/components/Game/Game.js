@@ -48,14 +48,18 @@ class Game extends React.Component {
     return (
       <div className='Game'>
         <h2>Game</h2>
+        <Timer className='col-xs-12'/>
         <Query
+          className='col-xs-12'
           friends={this.state.friends}
           questions={this.state.questions}
         />
         <Answer
+          className='col-xs-12'
           answers={this.state.answers}
+          checkAnswer={this.checkAnswer}
         />
-        <Timer />
+
       </div>
     );
   };
