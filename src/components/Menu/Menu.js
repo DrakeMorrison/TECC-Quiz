@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Prop-types from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
@@ -11,7 +11,6 @@ class Menu extends React.Component {
   state = {
     friends: [],
     games: [],
-
   };
 
   componentDidMount () {
