@@ -14,6 +14,7 @@ class Game extends React.Component {
     questions: [],
     answers: [],
     friends: [],
+    questionNum: 1,
   };
 
   componentDidMount () {
@@ -64,6 +65,7 @@ class Game extends React.Component {
           className='col-xs-12'
           friends={this.state.friends}
           questions={this.state.questions}
+          questionNum={this.state.questionNum}
         />
         <Answer
           className='col-xs-12'

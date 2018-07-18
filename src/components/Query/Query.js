@@ -3,10 +3,14 @@ import React from 'react';
 
 class Query extends React.Component {
   render () {
-    const {friends, questions} = this.props;// Needs question Number to tell which question to display;
+    const {friends, questions, questionNum} = this.props;
+
+    const currentQuestion = questions[questionNum];
+
     return (
       <div className='Query'>
         <h2>Query</h2>
+        {/* {currentQuestion} */}
       </div>
     );
   };
