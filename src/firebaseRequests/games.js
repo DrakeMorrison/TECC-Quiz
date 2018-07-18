@@ -21,4 +21,17 @@ const getRequest = () => {
   });
 };
 
-export default { getRequest };
+const postRequest = (game) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${constants.firebaseConfig.databaseURL}/game.json`, game)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default { getRequest, postRequest };

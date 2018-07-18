@@ -3,7 +3,7 @@ import React from 'react';
 import Query from '../Query/Query';
 import Answer from '../Answer/Answer';
 import Timer from '../Timer/Timer';
-// import gameRequests from '../../firebaseRequests/games';
+import gameRequests from '../../firebaseRequests/games';
 import answerRequests from '../../firebaseRequests/answers';
 import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
@@ -19,6 +19,14 @@ class Game extends React.Component {
   componentDidMount () {
     const scenarioId = this.props.match.params.scenario;
     const uid = authRequests.getUid();
+    const newGameObj = {
+      creationTime: Date.now(),
+      finalTime: 0,
+      isSaved: false,
+      points: 0,
+      scenarioId: scenarioId,
+      uid: uid,
+    };
 
     questionRequests
       .getByScenarioRequest(scenarioId)
@@ -33,11 +41,14 @@ class Game extends React.Component {
             friendRequests
               .getByUidRequest(uid)
               .then(friends => {
+
                 this.setState({ friends });
+                gameRequests
+                  .postRequest(newGameObj);
               });
           });
       })
-      .catch();
+      .catch(console.error.bind(console));
   }
 
   changeTime = () => {};
