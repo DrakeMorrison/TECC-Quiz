@@ -8,6 +8,7 @@ import answerRequests from '../../firebaseRequests/answers';
 import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
+import replaceFriendName from '../../helpers';
 
 class Game extends React.Component {
   state = {
@@ -15,11 +16,14 @@ class Game extends React.Component {
     answers: [],
     friends: [],
     questionNum: 1,
-    friendlyQuery: '',
+    // friendlyQuery: '',
+    questionId: '',
+    scenarioId: 0,
   };
 
   componentDidMount () {
-    const scenarioId = this.props.match.params.scenario;
+    const scenarioId = this.props.match.params.scenario * 1;
+    this.setState({ scenarioId });
     const uid = authRequests.getUid();
     const newGameObj = {
       creationTime: Date.now(),
@@ -34,21 +38,22 @@ class Game extends React.Component {
       .getByScenarioRequest(scenarioId)
       .then((questions) => {
 
-        this.setState({ questions });
         answerRequests
           .getRequest()
           .then(answers => {
 
-            this.setState({ answers });
             friendRequests
               .getByUidRequest(uid)
               .then(friends => {
 
-                this.setState({ friends });
-                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum);
-                const correctQuery = correctQuestionArray[0].text;
-                const friendlyQuery = correctQuery.replace(/(your friend)/i, this.state.friends[0].name);
-                this.setState({ friendlyQuery });
+                const firstQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum && question.scenarioId === scenarioId);
+                const questionId = firstQuestionArray[0].id;
+                this.setState({ questionId });
+                this.setState({ questions });
+                const friendlyQuestionsAndAnswers = replaceFriendName({ questions, answers, friends });
+                this.setState({ answers: friendlyQuestionsAndAnswers.answers });
+                this.setState({ friends: friendlyQuestionsAndAnswers.friends });
+
                 gameRequests
                   .postRequest(newGameObj);
               });
@@ -76,14 +81,15 @@ class Game extends React.Component {
         <Timer className='col-xs-12'/>
         <Query
           className='col-xs-12'
-          query={this.state.friendlyQuery}
+          questions={this.state.questions}
+          questionId={this.state.questionId}
         />
         <Answer
           className='col-xs-12'
           answers={this.state.answers}
           checkAnswer={this.checkAnswer}
+          questionId={this.state.questionId}
         />
-
       </div>
     );
   };
