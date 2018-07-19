@@ -9,6 +9,10 @@ import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 
+// const replaceWithFriendName (friendName, questions, answers) => {
+
+// };
+
 class Game extends React.Component {
   state = {
     questions: [],

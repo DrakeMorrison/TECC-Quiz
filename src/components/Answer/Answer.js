@@ -8,7 +8,7 @@ class Answer extends React.Component {
 
     const allAnswers = questionAnswers.map((answer) => {
       return (
-        <p>{answer.answerText}</p>
+        <p key={answer.id}>{answer.answerText}</p>
       );
     });
 
