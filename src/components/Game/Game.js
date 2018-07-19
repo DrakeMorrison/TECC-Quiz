@@ -19,6 +19,7 @@ class Game extends React.Component {
     // friendlyQuery: '',
     questionId: '',
     scenarioId: 0,
+    nextQuestionNum: 2,
   };
 
   componentDidMount () {
@@ -63,14 +64,28 @@ class Game extends React.Component {
   }
 
   changeTime = () => {};
-  gameOver = () => {};
-  checkAnswer = (check) => {
-    if (check === true) {
+
+  gameOver = () => {
+    alert('game over');
+  };
+
+  checkAnswer = (e) => {
+    if (e.target.dataset.iscorrect === 'true') {
       // correct answer
-      this.setState({ questionNum: this.state.questionNum + 1});
+
     } else {
       // wrong answer
       // subtract 10 seconds from timer
+    }
+    const questionsArray = Object.values(this.state.questions);
+
+    const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
+    if (filteredQuestions[0] === undefined) {
+      this.gameOver();
+    } else {
+      const nextId = filteredQuestions[0].id;
+      this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
+      // post to gameQuestions
     }
   };
 
