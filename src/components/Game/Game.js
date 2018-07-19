@@ -15,6 +15,7 @@ class Game extends React.Component {
     answers: [],
     friends: [],
     questionNum: 1,
+    correctQuery: '',
   };
 
   componentDidMount () {
@@ -44,6 +45,9 @@ class Game extends React.Component {
               .then(friends => {
 
                 this.setState({ friends });
+                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum);
+                const correctQuery = correctQuestionArray[0].text;
+                this.setState({ correctQuery });
                 gameRequests
                   .postRequest(newGameObj);
               });
@@ -63,9 +67,7 @@ class Game extends React.Component {
         <Timer className='col-xs-12'/>
         <Query
           className='col-xs-12'
-          friends={this.state.friends}
-          questions={this.state.questions}
-          questionNum={this.state.questionNum}
+          query={this.state.correctQuery}
         />
         <Answer
           className='col-xs-12'
