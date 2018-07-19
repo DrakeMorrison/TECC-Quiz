@@ -65,7 +65,9 @@ class Game extends React.Component {
 
   changeTime = () => {};
 
-  gameOver = () => {};
+  gameOver = () => {
+    alert('game over');
+  };
 
   checkAnswer = (e) => {
     if (e.target.dataset.iscorrect === 'true') {
@@ -77,9 +79,14 @@ class Game extends React.Component {
     }
     const questionsArray = Object.values(this.state.questions);
 
-    const nextId = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum)[0].id;
-    this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
-    // post to gameQuestions
+    const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
+    if (filteredQuestions[0] === undefined) {
+      this.gameOver();
+    } else {
+      const nextId = filteredQuestions[0].id;
+      this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
+      // post to gameQuestions
+    }
   };
 
   render () {
