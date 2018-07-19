@@ -49,7 +49,7 @@ class Menu extends React.Component {
           <p>Points: {game.points}</p>
         </div>
       );
-    });
+    }).reverse();
 
     return (
       <div className='Menu'>
