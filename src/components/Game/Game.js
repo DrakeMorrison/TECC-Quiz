@@ -16,12 +16,14 @@ class Game extends React.Component {
     answers: [],
     friends: [],
     questionNum: 1,
-    friendlyQuery: '',
+    // friendlyQuery: '',
     questionId: '',
+    scenarioId: 0,
   };
 
   componentDidMount () {
     const scenarioId = this.props.match.params.scenario * 1;
+    this.setState({ scenarioId });
     const uid = authRequests.getUid();
     const newGameObj = {
       creationTime: Date.now(),
@@ -79,7 +81,8 @@ class Game extends React.Component {
         <Timer className='col-xs-12'/>
         <Query
           className='col-xs-12'
-          query={this.state.friendlyQuery}
+          questions={this.state.questions}
+          questionId={this.state.questionId}
         />
         <Answer
           className='col-xs-12'

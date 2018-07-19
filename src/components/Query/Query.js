@@ -4,13 +4,19 @@ import React from 'react';
 class Query extends React.Component {
 
   render () {
-    const { query } = this.props;
+    const { questions, questionId } = this.props;
+    const query = questions.filter(question => question.id === questionId)
+      .map(question => {
+        return (
+          <p key={question.id}>{question.text}</p>
+        );
+      });
     // correctQuestion[0].text.replace(/friend/i, friends[0].name);
 
     return (
       <div className='Query'>
         <h2>Query</h2>
-        <p>{query}</p>
+        {query}
       </div>
     );
   };
