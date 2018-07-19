@@ -59,7 +59,15 @@ class Game extends React.Component {
 
   changeTime = () => {};
   gameOver = () => {};
-  checkAnswer = () => {};
+  checkAnswer = (check) => {
+    if (check === true) {
+      // correct answer
+      this.setState({ questionNum: this.state.questionNum + 1});
+    } else {
+      // wrong answer
+      // subtract 10 seconds from timer
+    }
+  };
 
   render () {
     return (
