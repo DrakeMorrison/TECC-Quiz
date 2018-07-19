@@ -8,10 +8,7 @@ import answerRequests from '../../firebaseRequests/answers';
 import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
-
-// const replaceWithFriendName (friendName, questions, answers) => {
-
-// };
+import replaceFriendName from '../../helpers';
 
 class Game extends React.Component {
   state = {
@@ -39,22 +36,22 @@ class Game extends React.Component {
       .getByScenarioRequest(scenarioId)
       .then((questions) => {
 
-        this.setState({ questions });
         answerRequests
           .getRequest()
           .then(answers => {
 
-            this.setState({ answers });
             friendRequests
               .getByUidRequest(uid)
               .then(friends => {
 
-                this.setState({ friends });
-                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum && question.scenarioId === scenarioId);
-                const questionId = correctQuestionArray[0].id;
-                const correctQuery = correctQuestionArray[0].text;
-                const friendlyQuery = correctQuery.replace(/(your friend)/i, this.state.friends[0].name);
-                this.setState({ friendlyQuery, questionId });
+                const firstQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum && question.scenarioId === scenarioId);
+                const questionId = firstQuestionArray[0].id;
+                this.setState({ questionId });
+                this.setState({ questions });
+                const friendlyQuestionsAndAnswers = replaceFriendName({ questions, answers, friends });
+                this.setState({ answers: friendlyQuestionsAndAnswers.answers });
+                this.setState({ friends: friendlyQuestionsAndAnswers.friends });
+
                 gameRequests
                   .postRequest(newGameObj);
               });
@@ -90,7 +87,6 @@ class Game extends React.Component {
           checkAnswer={this.checkAnswer}
           questionId={this.state.questionId}
         />
-
       </div>
     );
   };
