@@ -15,6 +15,7 @@ class Game extends React.Component {
     answers: [],
     friends: [],
     questionNum: 1,
+    friendlyQuery: '',
   };
 
   componentDidMount () {
@@ -44,6 +45,10 @@ class Game extends React.Component {
               .then(friends => {
 
                 this.setState({ friends });
+                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum);
+                const correctQuery = correctQuestionArray[0].text;
+                const friendlyQuery = correctQuery.replace(/(your friend)/i, this.state.friends[0].name);
+                this.setState({ friendlyQuery });
                 gameRequests
                   .postRequest(newGameObj);
               });
@@ -54,7 +59,15 @@ class Game extends React.Component {
 
   changeTime = () => {};
   gameOver = () => {};
-  checkAnswer = () => {};
+  checkAnswer = (check) => {
+    if (check === true) {
+      // correct answer
+      this.setState({ questionNum: this.state.questionNum + 1});
+    } else {
+      // wrong answer
+      // subtract 10 seconds from timer
+    }
+  };
 
   render () {
     return (
@@ -63,9 +76,7 @@ class Game extends React.Component {
         <Timer className='col-xs-12'/>
         <Query
           className='col-xs-12'
-          friends={this.state.friends}
-          questions={this.state.questions}
-          questionNum={this.state.questionNum}
+          query={this.state.friendlyQuery}
         />
         <Answer
           className='col-xs-12'
