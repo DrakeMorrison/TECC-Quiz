@@ -16,10 +16,11 @@ class Game extends React.Component {
     friends: [],
     questionNum: 1,
     friendlyQuery: '',
+    questionId: '',
   };
 
   componentDidMount () {
-    const scenarioId = this.props.match.params.scenario;
+    const scenarioId = this.props.match.params.scenario * 1;
     const uid = authRequests.getUid();
     const newGameObj = {
       creationTime: Date.now(),
@@ -45,10 +46,11 @@ class Game extends React.Component {
               .then(friends => {
 
                 this.setState({ friends });
-                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum);
+                const correctQuestionArray = questions.filter(question => question.questionNum === this.state.questionNum && question.scenarioId === scenarioId);
+                const questionId = correctQuestionArray[0].id;
                 const correctQuery = correctQuestionArray[0].text;
                 const friendlyQuery = correctQuery.replace(/(your friend)/i, this.state.friends[0].name);
-                this.setState({ friendlyQuery });
+                this.setState({ friendlyQuery, questionId });
                 gameRequests
                   .postRequest(newGameObj);
               });
@@ -82,6 +84,7 @@ class Game extends React.Component {
           className='col-xs-12'
           answers={this.state.answers}
           checkAnswer={this.checkAnswer}
+          questionId={this.state.questionId}
         />
 
       </div>
