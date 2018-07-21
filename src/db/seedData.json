@@ -99,7 +99,7 @@
     {
       "gameId": 0,
       "questionId": 0,
-      "isComplete": true
+      "isCorrect": true
     }
   ],
   "scenarios": [
