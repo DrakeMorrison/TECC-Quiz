@@ -1,6 +1,7 @@
 import React from 'react';
 
 import friendRequests from '../../firebaseRequests/friends';
+import authRequests from '../../firebaseRequests/auth';
 
 class Friends extends React.Component {
   state = this.props.location.state;
@@ -16,18 +17,45 @@ class Friends extends React.Component {
       .catch(console.error.bind(console));
   };
 
+  addFriend = (e) => {
+    const friend = {};
+    friend.uid = authRequests.getUid();
+    friend.name = e.target.parentNode.parentNode.children[0].value;
+    friendRequests
+      .postRequest(friend)
+      .then((res) => {
+        friend.id = res.data.name;
+        const newState = {...this.state};
+        newState.friends.push(friend);
+        this.setState({ newState });
+      })
+      .catch(console.error.bind(console));
+  };
+
   render () {
     const friendNames = this.state.friends.map(friend => {
       return (
-        <p key={friend.id} data-id={friend.id}>{friend.name}
+        <li key={friend.id} data-id={friend.id} className='list-group-item'>
+          <p>{friend.name}</p>
           <button className='btn btn-danger' onClick={this.deleteFriend}>Delete</button>
-        </p>
+        </li>
       );
     });
     return (
       <div className='Friends'>
-        <h2>My Friends</h2>
-        {friendNames}
+        <div className='container'>
+          <h2>My Friends</h2>
+
+          <div className="input-group col-xs-12 col-sm-6 col-sm-offset-3">
+            <input type="text" className="form-control" placeholder="New Friend Name" />
+            <span className="input-group-btn">
+              <button className="btn btn-success" type="button" onClick={this.addFriend}>Add Friend</button>
+            </span>
+          </div>
+          <ul className='list-group col-xs-12 col-sm-6 col-sm-offset-3'>
+            {friendNames}
+          </ul>
+        </div>
       </div>
     );
   };
