@@ -7,4 +7,13 @@ const replaceFriendName = ({questions, answers, friends}) => {
   };
 };
 
-export default replaceFriendName;
+const getClosestClass = function (elem, selectedClass) {
+  for (; elem && elem !== document; elem = elem.parentNode) {
+    if (elem.classList.contains(selectedClass)) {
+      return elem;
+    }
+  }
+  return null;
+};
+
+export default { replaceFriendName, getClosestClass };

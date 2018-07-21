@@ -8,15 +8,15 @@ import answerRequests from '../../firebaseRequests/answers';
 import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
-import replaceFriendName from '../../helpers';
+import helpers from '../../helpers';
 
 class Game extends React.Component {
   state = {
     questions: [],
     answers: [],
     friends: [],
+    game: {},
     questionNum: 1,
-    // friendlyQuery: '',
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
@@ -51,12 +51,17 @@ class Game extends React.Component {
                 const questionId = firstQuestionArray[0].id;
                 this.setState({ questionId });
                 this.setState({ questions });
-                const friendlyQuestionsAndAnswers = replaceFriendName({ questions, answers, friends });
+                const friendlyQuestionsAndAnswers = helpers.replaceFriendName({ questions, answers, friends });
                 this.setState({ answers: friendlyQuestionsAndAnswers.answers });
                 this.setState({ friends: friendlyQuestionsAndAnswers.friends });
 
                 gameRequests
-                  .postRequest(newGameObj);
+                  .postRequest(newGameObj)
+                  .then((res) => {
+
+                    newGameObj.id = res.data.name;
+                    this.setState({ game: newGameObj});
+                  });
               });
           });
       })
@@ -69,31 +74,45 @@ class Game extends React.Component {
     alert('game over');
   };
 
+  hero = () => {
+    alert('you saved your friend');
+  };
+
   checkAnswer = (e) => {
     if (e.target.dataset.iscorrect === 'true') {
       // correct answer
 
     } else {
       // wrong answer
-      // subtract 10 seconds from timer
+      // TODO: subtract 10 seconds from timer with changeTime
     }
     const questionsArray = Object.values(this.state.questions);
 
     const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
-    if (filteredQuestions[0] === undefined) {
-      this.gameOver();
-    } else {
+    if (filteredQuestions[0] === undefined) { // last question was answered
+      this.hero();
+    } else { // move on to next question
       const nextId = filteredQuestions[0].id;
       this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
-      // post to gameQuestions
+      // TODO: post to gameQuestions
     }
+    const questionPoints = helpers.getClosestClass(e.target,'Game').children[2].children[1].getAttribute('points') * 1;
+    // put to game collection
+    const updatedGame = {...this.state.game};
+    updatedGame.points += questionPoints;
+    gameRequests
+      .putRequest(updatedGame.id, updatedGame)
+      .catch(console.error.bind(console));
   };
 
   render () {
     return (
       <div className='Game'>
         <h2>Game</h2>
-        <Timer className='col-xs-12'/>
+        <Timer
+          className='col-xs-12'
+          changeTime={this.changeTime}
+        />
         <Query
           className='col-xs-12'
           questions={this.state.questions}
