@@ -79,27 +79,29 @@ class Game extends React.Component {
   };
 
   checkAnswer = (e) => {
-    if (e.target.dataset.iscorrect === 'true') {
-      // correct answer
+    const updatedGame = {...this.state.game};
 
-    } else {
+    if (e.target.dataset.iscorrect === 'false') {
       // wrong answer
       // TODO: subtract 10 seconds from timer with changeTime
     }
-    const questionsArray = Object.values(this.state.questions);
 
+    const questionsArray = Object.values(this.state.questions);
     const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
+
     if (filteredQuestions[0] === undefined) { // last question was answered
       this.hero();
+      updatedGame.isSaved = true;
+      updatedGame.finalTime = Date.now();
     } else { // move on to next question
       const nextId = filteredQuestions[0].id;
       this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
       // TODO: post to gameQuestions
     }
+
     const questionPoints = helpers.getClosestClass(e.target,'Game').children[2].children[1].getAttribute('points') * 1;
-    // put to game collection
-    const updatedGame = {...this.state.game};
     updatedGame.points += questionPoints;
+    // put to game collection
     gameRequests
       .putRequest(updatedGame.id, updatedGame)
       .catch(console.error.bind(console));
