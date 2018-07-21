@@ -34,4 +34,17 @@ const getByUidRequest = (uid) => {
   });
 };
 
-export default { postRequest, getByUidRequest };
+const deleteRequest = (friendId) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(`${constants.firebaseConfig.databaseURL}/friends/${friendId}.json`)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export default { postRequest, getByUidRequest, deleteRequest };

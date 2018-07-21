@@ -53,10 +53,10 @@ class Menu extends React.Component {
 
     return (
       <div className='Menu'>
-        <div className='col-xs-4 menu-friends'>
+        <Link className='col-xs-4 menu-friends' to={{pathname: '/friends', state: { friends: this.state.friends }}}>
           <h4>Friends</h4>
           {friendNames}
-        </div>
+        </Link>
         <div className='col-xs-4'>
           <h2>Menu</h2>
           <Link className='btn btn-primary' to='/game/1'>Scenario 1</Link>
