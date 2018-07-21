@@ -20,6 +20,7 @@ class Game extends React.Component {
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
+    startTime: Date.now() + 30000,
   };
 
   componentDidMount () {
@@ -68,7 +69,11 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   }
 
-  changeTime = () => {};
+  changeTime = () => { // reduce time left by 10 seconds on a wrong click
+    const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000;
+    const nextTime = Date.now() + reducedTime;
+    this.setState({ startTime: nextTime });
+  };
 
   gameOver = () => {
     alert('game over');
@@ -82,8 +87,8 @@ class Game extends React.Component {
     const updatedGame = {...this.state.game};
 
     if (e.target.dataset.iscorrect === 'false') {
-      // wrong answer
-      // TODO: subtract 10 seconds from timer with changeTime
+      // subtract 10 seconds from timer with changeTime
+      this.changeTime();
     }
 
     const questionsArray = Object.values(this.state.questions);
@@ -99,10 +104,10 @@ class Game extends React.Component {
       // TODO: post to gameQuestions
     }
 
-    const questionPoints = helpers.getClosestClass(e.target,'Game').children[2].children[1].getAttribute('points') * 1;
+    const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
     updatedGame.points += questionPoints;
-    // put to game collection
-    gameRequests
+
+    gameRequests // put to game collection
       .putRequest(updatedGame.id, updatedGame)
       .catch(console.error.bind(console));
   };
@@ -111,14 +116,15 @@ class Game extends React.Component {
     return (
       <div className='Game'>
         <h2>Game</h2>
-        <Timer
-          className='col-xs-12'
-          changeTime={this.changeTime}
-        />
         <Query
-          className='col-xs-12'
+          className='col-xs-9'
           questions={this.state.questions}
           questionId={this.state.questionId}
+        />
+        <Timer
+          className='col-xs-3'
+          gameOver={this.gameOver}
+          startTime={this.state.startTime}
         />
         <Answer
           className='col-xs-12'
