@@ -12,7 +12,7 @@ class Timer extends React.Component {
           date={startTime}
           intervalDelay={0}
           precision={1}
-          renderer={props => <div>{props.total}</div>}
+          renderer={props => <div id='timer-value'>{props.total}</div>}
         >
           <div className='jumbotron'><h2>Game Over</h2></div>
         </Countdown>

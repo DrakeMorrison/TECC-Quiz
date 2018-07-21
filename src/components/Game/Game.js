@@ -69,8 +69,8 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   }
 
-  changeTime = () => {
-    const reducedTime = document.getElementById();
+  changeTime = () => { // reduce time left by 10 seconds on a wrong click
+    const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000;
     const nextTime = Date.now() + reducedTime;
     this.setState({ startTime: nextTime });
   };
@@ -87,8 +87,7 @@ class Game extends React.Component {
     const updatedGame = {...this.state.game};
 
     if (e.target.dataset.iscorrect === 'false') {
-      // wrong answer
-      // TODO: subtract 10 seconds from timer with changeTime
+      // subtract 10 seconds from timer with changeTime
       this.changeTime();
     }
 
@@ -107,8 +106,8 @@ class Game extends React.Component {
 
     const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
     updatedGame.points += questionPoints;
-    // put to game collection
-    gameRequests
+
+    gameRequests // put to game collection
       .putRequest(updatedGame.id, updatedGame)
       .catch(console.error.bind(console));
   };

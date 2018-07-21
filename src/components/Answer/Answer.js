@@ -8,7 +8,7 @@ class Answer extends React.Component {
 
     const allAnswers = questionAnswers.map((answer) => {
       return (
-        <button className='btn btn-default' iscorrect={answer.isCorrect.toString()} key={answer.id} onClick={checkAnswer}>{answer.answerText}</button>
+        <button className='btn btn-default' data-iscorrect={answer.isCorrect.toString()} key={answer.id} onClick={checkAnswer}>{answer.answerText}</button>
       );
     });
 
