@@ -21,6 +21,7 @@
     "start-js": "react-scripts start",
     "build-js": "react-scripts build",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm-run-all build-css build-js"
+    "build": "npm-run-all build-css build-js",
+    "deploy": "npm run build && firebase deploy"
   }
 }
