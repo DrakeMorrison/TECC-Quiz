@@ -44,10 +44,10 @@ class Menu extends React.Component {
 
     const gameList = this.state.games.map(game => {
       return (
-        <div key={game.id}>
+        <Link to={{ pathname: `completegame/${game.id}` }} key={game.id}>
           <p>Creation Time: {game.creationTime}</p>
           <p>Points: {game.points}</p>
-        </div>
+        </Link>
       );
     }).reverse();
 
