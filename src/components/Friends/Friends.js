@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import friendRequests from '../../firebaseRequests/friends';
 import authRequests from '../../firebaseRequests/auth';
@@ -55,6 +56,7 @@ class Friends extends React.Component {
           <ul className='list-group col-xs-12 col-sm-6 col-sm-offset-3'>
             {friendNames}
           </ul>
+          <Link to='/menu'>Back to Menu</Link>
         </div>
       </div>
     );
