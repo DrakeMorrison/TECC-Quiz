@@ -69,10 +69,14 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   }
 
-  changeTime = () => { // reduce time left by 10 seconds on a wrong click
+  changeTime = (isLastQuestion) => { // reduce time left by 10 seconds on a wrong click
     const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000;
-    const nextTime = Date.now() + reducedTime;
-    this.setState({ startTime: nextTime });
+    if (reducedTime > 0 && isLastQuestion) { // last wrong question was not deadly
+      this.hero();
+    } else {
+      const nextTime = Date.now() + reducedTime;
+      this.setState({ startTime: nextTime });
+    }
   };
 
   gameOver = () => {
@@ -121,7 +125,7 @@ class Game extends React.Component {
     } else if (!answerCorrect && !lastQuestion) {
       // change time and next question
       const nextId = filteredQuestions[0].id;
-      this.changeTime();
+      this.changeTime(false);
       this.nextQuestion(nextId);
     } else if (answerCorrect && !lastQuestion) {
       // update game and next question
@@ -134,10 +138,10 @@ class Game extends React.Component {
       // change time and update game
       updatedGame.finalTime = Date.now();
 
-      this.changeTime();
+      this.changeTime(true);
       this.updateGame(updatedGame);
     }
-    // post to game questions
+    // TODO: post to game questions
 
   };
 
