@@ -69,47 +69,80 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   }
 
-  changeTime = () => { // reduce time left by 10 seconds on a wrong click
+  changeTime = (isLastQuestion) => { // reduce time left by 10 seconds on a wrong click
     const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000;
-    const nextTime = Date.now() + reducedTime;
-    this.setState({ startTime: nextTime });
+    if (reducedTime > 0 && isLastQuestion) { // last wrong question was not deadly
+      this.hero();
+    } else {
+      const nextTime = Date.now() + reducedTime;
+      this.setState({ startTime: nextTime });
+    }
   };
 
   gameOver = () => {
-    alert('game over');
+    const updatedGame = {...this.state.game};
+    updatedGame.isSaved = false;
+    updatedGame.finalTime = Date.now();
+    gameRequests // put to game collection
+      .putRequest(updatedGame.id, updatedGame)
+      .then(() => {
+        // TODO: decide if user should be redirected to menu or review page
+        alert('game over');
+      })
+      .catch(console.error.bind(console));
   };
 
   hero = () => {
     alert('you saved your friend');
   };
 
+  updateGame = (updatedGameObj) => {
+    gameRequests
+      .putRequest(updatedGameObj.id, updatedGameObj)
+      .catch(console.error.bind(console));
+  };
+
+  nextQuestion = (nextId) => {
+    this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
+  };
+
   checkAnswer = (e) => {
     const updatedGame = {...this.state.game};
-
-    if (e.target.dataset.iscorrect === 'false') {
-      // subtract 10 seconds from timer with changeTime
-      this.changeTime();
-    }
-
     const questionsArray = Object.values(this.state.questions);
     const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
+    const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
+    const answerCorrect = e.target.dataset.iscorrect === 'true';
+    const lastQuestion = filteredQuestions[0] === undefined;
 
-    if (filteredQuestions[0] === undefined) { // last question was answered
-      this.hero();
+    if (answerCorrect && lastQuestion) {
+      // update game and fire hero
       updatedGame.isSaved = true;
       updatedGame.finalTime = Date.now();
-    } else { // move on to next question
+      updatedGame.points += questionPoints;
+
+      this.updateGame(updatedGame);
+      this.hero();
+    } else if (!answerCorrect && !lastQuestion) {
+      // change time and next question
       const nextId = filteredQuestions[0].id;
-      this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
-      // TODO: post to gameQuestions
+      this.changeTime(false);
+      this.nextQuestion(nextId);
+    } else if (answerCorrect && !lastQuestion) {
+      // update game and next question
+      const nextId = filteredQuestions[0].id;
+      updatedGame.points += questionPoints;
+
+      this.updateGame(updatedGame);
+      this.nextQuestion(nextId);
+    } else if (!answerCorrect && lastQuestion) {
+      // change time and update game
+      updatedGame.finalTime = Date.now();
+
+      this.changeTime(true);
+      this.updateGame(updatedGame);
     }
+    // TODO: post to game questions
 
-    const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
-    updatedGame.points += questionPoints;
-
-    gameRequests // put to game collection
-      .putRequest(updatedGame.id, updatedGame)
-      .catch(console.error.bind(console));
   };
 
   render () {
