@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
 import questionRequests from '../../firebaseRequests/questions';
@@ -44,6 +45,7 @@ class GameReview extends React.Component {
     return (
       <div className='GameReview'>
         <h2>GameReview</h2>
+        <Link to='/menu'>Back to Menu</Link>
         <p>Id: {this.state.currentGame.id}</p>
         <p>Points: {this.state.currentGame.points}</p>
         <ul>
