@@ -20,9 +20,9 @@ class GameReview extends React.Component {
         .then((data) => {
           data.forEach(gameQuestion => {
             questionRequests
-              .getRequest()
+              .getById(gameQuestion.questionId)
               .then((res) => {
-                console.error(res); // TODO: wip
+                res.id = gameQuestion.questionId;
                 allQuestions.push(res);
                 this.setState({ matchingGameQuestions: allQuestions });
               });
