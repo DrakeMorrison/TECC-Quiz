@@ -21,4 +21,17 @@ const getByScenarioRequest = (scenarioId) => {
   });
 };
 
-export default { getByScenarioRequest };
+const getById = (Id) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`${constants.firebaseConfig.databaseURL}/questions/${Id}.json`)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default { getByScenarioRequest, getById };

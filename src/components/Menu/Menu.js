@@ -44,7 +44,7 @@ class Menu extends React.Component {
 
     const gameList = this.state.games.map(game => {
       return (
-        <Link to={{ pathname: `completegame/${game.id}` }} key={game.id}>
+        <Link to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
           <p>Creation Time: {game.creationTime}</p>
           <p>Points: {game.points}</p>
         </Link>
