@@ -21,12 +21,34 @@ const getByScenarioRequest = (scenarioId) => {
   });
 };
 
-const getById = (Id) => {
+// const getById = (Id) => {
+//   return new Promise((resolve, reject) => {
+//     axios
+//       .get(`${constants.firebaseConfig.databaseURL}/questions/${Id}.json`)
+//       .then(res => {
+//         resolve(res.data);
+//       })
+//       .catch(err => {
+//         reject(err);
+//       });
+//   });
+// };
+
+// TODO: get firebase Id on res object
+
+const getRequest = (Id) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/questions/${Id}.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/questions.json`)
       .then(res => {
-        resolve(res.data);
+        const stuff = [];
+        if (res.data !== null) {
+          Object.keys(res.data).forEach(fbKey => {
+            res.data[fbKey].id = fbKey;
+            stuff.push(res.data[fbKey]);
+          });
+        }
+        resolve(stuff);
       })
       .catch(err => {
         reject(err);
@@ -34,4 +56,4 @@ const getById = (Id) => {
   });
 };
 
-export default { getByScenarioRequest, getById };
+export default { getByScenarioRequest, getRequest };

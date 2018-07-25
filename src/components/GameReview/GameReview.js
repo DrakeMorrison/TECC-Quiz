@@ -13,24 +13,25 @@ class GameReview extends React.Component {
   };
 
   componentDidMount () {
-    this.setState({ currentGameId: this.props.match.params.id });
     const allQuestions = [];
-
-    gameQuestionsRequests
-      .getByGameIdRequest(this.state.currentGameId)
-      .then((data) => {
-        data.forEach(gameQuestion => {
-          questionRequests
-            .getById(gameQuestion.questionId)
-            .then((res) => {
-              allQuestions.push(res);
-              this.setState({ matchingGameQuestions: allQuestions });
-            });
-        });
-        const currentGame = this.props.location.state.games.filter(game => game.id === this.state.currentGameId)[0];
-        this.setState({ currentGame });
-      })
-      .catch(console.error.bind(console));
+    this.setState({ currentGameId: this.props.match.params.id }, () => {
+      gameQuestionsRequests
+        .getByGameIdRequest(this.state.currentGameId)
+        .then((data) => {
+          data.forEach(gameQuestion => {
+            questionRequests
+              .getRequest()
+              .then((res) => {
+                console.error(res); // TODO: wip
+                allQuestions.push(res);
+                this.setState({ matchingGameQuestions: allQuestions });
+              });
+          });
+          const currentGame = this.props.location.state.games.filter(game => game.id === this.state.currentGameId)[0];
+          this.setState({ currentGame });
+        })
+        .catch(console.error.bind(console));
+    });
   }
 
   render () {
