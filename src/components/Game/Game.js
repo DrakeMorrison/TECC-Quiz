@@ -9,6 +9,7 @@ import questionRequests from '../../firebaseRequests/questions';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 import helpers from '../../helpers';
+import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
 
 class Game extends React.Component {
   state = {
@@ -110,9 +111,11 @@ class Game extends React.Component {
     const updatedGame = {...this.state.game};
     const questionsArray = Object.values(this.state.questions);
     const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
+    const submittedQuestion = this.state.questions.filter(question => question.id === this.state.questionId)[0];
     const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
     const answerCorrect = e.target.dataset.iscorrect === 'true';
     const lastQuestion = filteredQuestions[0] === undefined;
+    const gameQuestion = {};
 
     if (answerCorrect && lastQuestion) {
       // update game and fire hero
@@ -122,11 +125,13 @@ class Game extends React.Component {
 
       this.updateGame(updatedGame);
       this.hero();
+      gameQuestion.isCorrect = true;
     } else if (!answerCorrect && !lastQuestion) {
       // change time and next question
       const nextId = filteredQuestions[0].id;
       this.changeTime(false);
       this.nextQuestion(nextId);
+      gameQuestion.isCorrect = false;
     } else if (answerCorrect && !lastQuestion) {
       // update game and next question
       const nextId = filteredQuestions[0].id;
@@ -134,15 +139,26 @@ class Game extends React.Component {
 
       this.updateGame(updatedGame);
       this.nextQuestion(nextId);
+      gameQuestion.isCorrect = true;
     } else if (!answerCorrect && lastQuestion) {
       // change time and update game
       updatedGame.finalTime = Date.now();
 
       this.changeTime(true);
       this.updateGame(updatedGame);
+      gameQuestion.isCorrect = false;
     }
-    // TODO: post to game questions
+    // Post to game questions collection
+    gameQuestion.isCorrect = answerCorrect;
+    gameQuestion.gameId = updatedGame.id;
+    gameQuestion.questionId = submittedQuestion.id;
+    this.addToGameQuestions(gameQuestion);
+  };
 
+  addToGameQuestions = (gameQuestionObj) => {
+    gameQuestionsRequests
+      .postRequest(gameQuestionObj)
+      .catch(console.error.bind(console));
   };
 
   render () {
