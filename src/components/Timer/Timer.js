@@ -1,8 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Countdown from 'react-countdown-now';
 
 class Timer extends React.Component {
+  static propTypes = {
+    gameOver: PropTypes.func.isRequired,
+    startTime: PropTypes.number.isRequired,
+  };
+
   render () {
     const {startTime, gameOver} = this.props;
 

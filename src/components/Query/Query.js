@@ -1,7 +1,11 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class Query extends React.Component {
+  static propTypes = {
+    questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+    questionId: PropTypes.string.isRequired,
+  };
 
   render () {
     const { questions, questionId } = this.props;
