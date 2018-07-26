@@ -5,7 +5,7 @@ class Home extends React.Component {
   render () {
     return (
       <div className='Home'>
-        <div class="jumbotron">
+        <div className="jumbotron">
           <h1>Friend Savior</h1>
           <p>Save your friends in this exciting game by testing your medical first-aid skills!</p>
           <p><Link className='btn btn-lg btn-primary' to='/login'>Login</Link></p>
