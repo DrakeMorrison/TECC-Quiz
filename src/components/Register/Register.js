@@ -35,7 +35,7 @@ class Register extends React.Component {
             userRequests
               .postRequest({
                 id: authRequests.getUid(),
-                userAwards: [],
+                friendsSaved: 0,
               })
               .then(() => {
                 this.props.history.push('/menu');

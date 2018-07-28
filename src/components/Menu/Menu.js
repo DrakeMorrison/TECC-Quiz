@@ -6,6 +6,7 @@ import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 import gameRequests from '../../firebaseRequests/games';
 import awardRequests from '../../firebaseRequests/awards';
+import userRequests from '../../firebaseRequests/users';
 import './Menu.css';
 
 class Menu extends React.Component {
@@ -16,8 +17,7 @@ class Menu extends React.Component {
   state = {
     friends: [],
     games: [],
-    awards: [],
-    users: [],
+    userAwards: [],
   };
 
   componentDidMount () {
@@ -33,12 +33,21 @@ class Menu extends React.Component {
             awardRequests
               .getRequest()
               .then(awards => {
-                this.setState({ awards });
+                userRequests
+                  .getRequest()
+                  .then((users) => {
+                    const currentUser = users.filter(user => user.id === uid)[0];
+                    this.setUserAwards(awards, currentUser);
+                  });
               });
           });
       })
       .catch(console.error.bind(console));
   }
+
+  setUserAwards = (awards, uid) => {
+    console.error(uid, awards);
+  };
 
   render () {
     const {runAway} = this.props;
@@ -63,7 +72,7 @@ class Menu extends React.Component {
       );
     }).reverse();
 
-    const awardList = this.state.awards.map(award => {
+    const awardList = this.state.userAwards.map(award => {
       return (
         <p key={award.id}>{award.name}</p>
       );
