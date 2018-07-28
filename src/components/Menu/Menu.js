@@ -46,7 +46,14 @@ class Menu extends React.Component {
   }
 
   setUserAwards = (awards, currentUser) => {
-    console.error(currentUser, awards); // TODO: setState of userAwards
+    const userAwards = awards.filter(award => {
+      if (award.pointAward) {
+        return currentUser.points >= award.pointValue;
+      } else {
+        return currentUser.friendsSaved >= award.numSaved;
+      }
+    });
+    this.setState({ userAwards });
   };
 
   render () {
