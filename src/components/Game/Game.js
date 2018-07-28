@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 
 import Query from '../Query/Query';
 import Answer from '../Answer/Answer';
@@ -11,6 +12,8 @@ import friendRequests from '../../firebaseRequests/friends';
 import helpers from '../../helpers';
 import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
 
+ReactModal.setAppElement('#root');
+
 class Game extends React.Component {
   state = {
     questions: [],
@@ -22,7 +25,8 @@ class Game extends React.Component {
     scenarioId: 0,
     nextQuestionNum: 2,
     startTime: Date.now() + 30000, // 30 seconds to finish game
-    endOfGame: false,
+    gameIsWon: false,
+    showModal: false,
   };
 
   componentDidMount () {
@@ -82,7 +86,7 @@ class Game extends React.Component {
   };
 
   gameOver = () => {
-    if (!this.state.endOfGame) {
+    if (!this.state.gameIsWon) {
       const updatedGame = {...this.state.game};
       updatedGame.isSaved = false;
       updatedGame.finalTime = Date.now();
@@ -91,14 +95,17 @@ class Game extends React.Component {
         .then(() => {
           // TODO: decide if user should be redirected to menu or review page
           alert('game over');
+          this.setState({ showModal: true });
         })
         .catch(console.error.bind(console));
     }
   };
 
   hero = () => {
-    this.setState({ endOfGame: true }, () => {
-      alert('you saved your friend');
+    this.setState({ gameIsWon: true }, () => {
+      alert('you saved your friend'); // TODO: show modal?
+      this.setState({ showModal: true });
+
     });
   };
 
@@ -166,6 +173,10 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   };
 
+  closeModal = () => {
+    this.setState({ showModal: false });
+  };
+
   render () {
     return (
       <div className='Game'>
@@ -186,6 +197,12 @@ class Game extends React.Component {
           checkAnswer={this.checkAnswer}
           questionId={this.state.questionId}
         />
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel='Minimal Modal Example'
+        >
+          <button onClick={this.closeModal}>Close Modal</button>
+        </ReactModal>
       </div>
     );
   };
