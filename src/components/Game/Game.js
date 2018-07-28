@@ -175,9 +175,14 @@ class Game extends React.Component {
 
   closeModal = () => {
     this.setState({ showModal: false });
+    this.props.history.push('/menu');
   };
 
   render () {
+    const {awards} = this.props;
+
+    const awardList = awards.map();
+
     return (
       <div className='Game'>
         <h2>Game</h2>
@@ -201,6 +206,9 @@ class Game extends React.Component {
           isOpen={this.state.showModal}
           contentLabel='Minimal Modal Example'
         >
+          <h2>{this.state.gameIsWon ? 'You Saved Your Friend!' : 'Game Over'}</h2>
+          <h3>Awards</h3>
+          {awardList}
           <button onClick={this.closeModal}>Close Modal</button>
         </ReactModal>
       </div>

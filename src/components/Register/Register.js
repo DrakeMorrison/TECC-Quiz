@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
+import userRequests from '../../firebaseRequests/users';
 
 import './Register.css';
 
@@ -31,7 +32,14 @@ class Register extends React.Component {
         friendRequests
           .postRequest(friend)
           .then(() => {
-            this.props.history.push('/menu');
+            userRequests
+              .postRequest({
+                id: authRequests.getUid(),
+                userAwards: [],
+              })
+              .then(() => {
+                this.props.history.push('/menu');
+              });
           });
       })
       .catch(console.error.bind(console));
