@@ -83,6 +83,13 @@
       "pointValue": 60,
       "pointAward": true,
       "numSaved": null
+    },
+    {
+      "name": "savior of many",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": null,
+      "pointAward": false,
+      "numSaved": 3
     }
   ],
   "game": [
@@ -110,7 +117,8 @@
   "users": [
     {
       "id": "uGnsFD0n2qOcGa85cKvEEAwoARA3",
-      "friendsSaved": 0
+      "friendsSaved": 0,
+      "points": 0
     }
   ]
 }

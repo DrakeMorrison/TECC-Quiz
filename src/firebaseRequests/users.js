@@ -1,10 +1,10 @@
 import axios from 'axios';
 import constants from '../constants';
 
-const postRequest = (friend) => {
+const postRequest = (user) => {
   return new Promise((resolve, reject) => {
     axios
-      .post(`${constants.firebaseConfig.databaseURL}/users.json`, friend)
+      .post(`${constants.firebaseConfig.databaseURL}/users.json`, user)
       .then(res => {
         resolve(res);
       })
@@ -22,6 +22,7 @@ const getRequest = () => {
         const stuff = [];
         if (res.data !== null) {
           Object.keys(res.data).forEach(fbKey => {
+            res.data[fbKey].fbKey = fbKey;
             stuff.push(res.data[fbKey]);
           });
         }
@@ -33,4 +34,17 @@ const getRequest = () => {
   });
 };
 
-export default { postRequest, getRequest };
+const putRequest = (uid, game) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .put(`${constants.firebaseConfig.databaseURL}/users/${uid}.json`, game)
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export default { postRequest, getRequest, putRequest };
