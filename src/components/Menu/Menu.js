@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 import gameRequests from '../../firebaseRequests/games';
+import awardRequests from '../../firebaseRequests/awards';
 import './Menu.css';
 
 class Menu extends React.Component {
@@ -15,18 +16,24 @@ class Menu extends React.Component {
   state = {
     friends: [],
     games: [],
+    awards: [],
   };
 
   componentDidMount () {
     const uid = authRequests.getUid();
     friendRequests
       .getByUidRequest(uid)
-      .then((friends) => {
+      .then(friends => {
         this.setState({ friends });
         gameRequests
           .getRequest()
-          .then((games) => {
+          .then(games => {
             this.setState({ games });
+            awardRequests
+              .getRequest()
+              .then(awards => {
+                this.setState({ awards });
+              });
           });
       })
       .catch(console.error.bind(console));
