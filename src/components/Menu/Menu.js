@@ -17,6 +17,7 @@ class Menu extends React.Component {
     friends: [],
     games: [],
     awards: [],
+    users: [],
   };
 
   componentDidMount () {
@@ -26,7 +27,7 @@ class Menu extends React.Component {
       .then(friends => {
         this.setState({ friends });
         gameRequests
-          .getRequest()
+          .getByUidRequest(uid)
           .then(games => {
             this.setState({ games });
             awardRequests
@@ -62,6 +63,12 @@ class Menu extends React.Component {
       );
     }).reverse();
 
+    const awardList = this.state.awards.map(award => {
+      return (
+        <p key={award.id}>{award.name}</p>
+      );
+    });
+
     return (
       <div className='Menu'>
         <Link className='col-xs-4 menu-friends' to={{pathname: '/friends', state: { friends: this.state.friends }}}>
@@ -74,6 +81,8 @@ class Menu extends React.Component {
           <Link className='btn btn-primary' to='/game/2'>Scenario 2</Link>
           <button className='btn btn-danger' onClick={logoutClickEvent}>Logout</button>
           <Link to='/'>Back</Link>
+          <h2>Awards</h2>
+          {awardList}
         </div>
         <div className='col-xs-4 menu-games'>
           <h4>Games</h4>

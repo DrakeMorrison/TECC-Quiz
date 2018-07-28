@@ -1,10 +1,10 @@
 import axios from 'axios';
 import constants from '../constants';
 
-const getRequest = () => {
+const getByUidRequest = (uid) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/game.json`)
+      .get(`${constants.firebaseConfig.databaseURL}/game.json?orderBy="uid"&equalTo="${uid}"`)
       .then(res => {
         const stuff = [];
         if (res.data !== null) {
@@ -47,4 +47,4 @@ const putRequest = (gameId, game) => {
   });
 };
 
-export default { getRequest, postRequest, putRequest };
+export default { getByUidRequest, postRequest, putRequest };
