@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 import gameRequests from '../../firebaseRequests/games';
+import awardRequests from '../../firebaseRequests/awards';
+import userRequests from '../../firebaseRequests/users';
 import './Menu.css';
 
 class Menu extends React.Component {
@@ -15,22 +17,37 @@ class Menu extends React.Component {
   state = {
     friends: [],
     games: [],
+    userAwards: [],
   };
 
   componentDidMount () {
     const uid = authRequests.getUid();
     friendRequests
       .getByUidRequest(uid)
-      .then((friends) => {
+      .then(friends => {
         this.setState({ friends });
         gameRequests
-          .getRequest()
-          .then((games) => {
+          .getByUidRequest(uid)
+          .then(games => {
             this.setState({ games });
+            awardRequests
+              .getRequest()
+              .then(awards => {
+                userRequests
+                  .getRequest()
+                  .then((users) => {
+                    const currentUser = users.filter(user => user.id === uid)[0];
+                    this.setUserAwards(awards, currentUser);
+                  });
+              });
           });
       })
       .catch(console.error.bind(console));
   }
+
+  setUserAwards = (awards, currentUser) => {
+    console.error(currentUser, awards);
+  };
 
   render () {
     const {runAway} = this.props;
@@ -55,6 +72,12 @@ class Menu extends React.Component {
       );
     }).reverse();
 
+    const awardList = this.state.userAwards.map(award => {
+      return (
+        <p key={award.id}>{award.name}</p>
+      );
+    });
+
     return (
       <div className='Menu'>
         <Link className='col-xs-4 menu-friends' to={{pathname: '/friends', state: { friends: this.state.friends }}}>
@@ -67,6 +90,8 @@ class Menu extends React.Component {
           <Link className='btn btn-primary' to='/game/2'>Scenario 2</Link>
           <button className='btn btn-danger' onClick={logoutClickEvent}>Logout</button>
           <Link to='/'>Back</Link>
+          <h2>Awards</h2>
+          {awardList}
         </div>
         <div className='col-xs-4 menu-games'>
           <h4>Games</h4>

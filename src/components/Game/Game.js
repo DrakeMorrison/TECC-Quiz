@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactModal from 'react-modal';
 
 import Query from '../Query/Query';
 import Answer from '../Answer/Answer';
@@ -11,17 +12,21 @@ import friendRequests from '../../firebaseRequests/friends';
 import helpers from '../../helpers';
 import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
 
+ReactModal.setAppElement('#root');
+
 class Game extends React.Component {
   state = {
     questions: [],
     answers: [],
     friends: [],
     game: {},
-    questionNum: 1,
+    questionNum: 1, // first question
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
-    startTime: Date.now() + 30000,
+    startTime: Date.now() + 30000, // 30 seconds to finish game
+    gameIsWon: false,
+    showModal: false,
   };
 
   componentDidMount () {
@@ -81,20 +86,27 @@ class Game extends React.Component {
   };
 
   gameOver = () => {
-    const updatedGame = {...this.state.game};
-    updatedGame.isSaved = false;
-    updatedGame.finalTime = Date.now();
-    gameRequests // put to game collection
-      .putRequest(updatedGame.id, updatedGame)
-      .then(() => {
-        // TODO: decide if user should be redirected to menu or review page
-        alert('game over');
-      })
-      .catch(console.error.bind(console));
+    if (!this.state.gameIsWon) {
+      const updatedGame = {...this.state.game};
+      updatedGame.isSaved = false;
+      updatedGame.finalTime = Date.now();
+      gameRequests // put to game collection
+        .putRequest(updatedGame.id, updatedGame)
+        .then(() => {
+          // TODO: decide if user should be redirected to menu or review page
+          alert('game over');
+          this.setState({ showModal: true });
+        })
+        .catch(console.error.bind(console));
+    }
   };
 
   hero = () => {
-    alert('you saved your friend');
+    this.setState({ gameIsWon: true }, () => {
+      alert('you saved your friend'); // TODO: show modal?
+      this.setState({ showModal: true });
+
+    });
   };
 
   updateGame = (updatedGameObj) => {
@@ -161,6 +173,11 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   };
 
+  closeModal = () => {
+    this.setState({ showModal: false });
+    this.props.history.push('/menu');
+  };
+
   render () {
     return (
       <div className='Game'>
@@ -181,6 +198,13 @@ class Game extends React.Component {
           checkAnswer={this.checkAnswer}
           questionId={this.state.questionId}
         />
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel='Minimal Modal Example'
+        >
+          <h2>{this.state.gameIsWon ? 'You Saved Your Friend!' : 'Game Over'}</h2>
+          <button onClick={this.closeModal}>Close Modal</button>
+        </ReactModal>
       </div>
     );
   };
