@@ -17,11 +17,12 @@ class Game extends React.Component {
     answers: [],
     friends: [],
     game: {},
-    questionNum: 1,
+    questionNum: 1, // first question
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
-    startTime: Date.now() + 30000,
+    startTime: Date.now() + 30000, // 30 seconds to finish game
+    endOfGame: false,
   };
 
   componentDidMount () {
@@ -81,20 +82,24 @@ class Game extends React.Component {
   };
 
   gameOver = () => {
-    const updatedGame = {...this.state.game};
-    updatedGame.isSaved = false;
-    updatedGame.finalTime = Date.now();
-    gameRequests // put to game collection
-      .putRequest(updatedGame.id, updatedGame)
-      .then(() => {
-        // TODO: decide if user should be redirected to menu or review page
-        alert('game over');
-      })
-      .catch(console.error.bind(console));
+    if (!this.state.endOfGame) {
+      const updatedGame = {...this.state.game};
+      updatedGame.isSaved = false;
+      updatedGame.finalTime = Date.now();
+      gameRequests // put to game collection
+        .putRequest(updatedGame.id, updatedGame)
+        .then(() => {
+          // TODO: decide if user should be redirected to menu or review page
+          alert('game over');
+        })
+        .catch(console.error.bind(console));
+    }
   };
 
   hero = () => {
-    alert('you saved your friend');
+    this.setState({ endOfGame: true }, () => {
+      alert('you saved your friend');
+    });
   };
 
   updateGame = (updatedGameObj) => {
