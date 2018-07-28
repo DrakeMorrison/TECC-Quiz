@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
@@ -8,6 +8,10 @@ import gameRequests from '../../firebaseRequests/games';
 import './Menu.css';
 
 class Menu extends React.Component {
+  static propTypes = {
+    runAway: PropTypes.func.isRequired,
+  };
+
   state = {
     friends: [],
     games: [],
