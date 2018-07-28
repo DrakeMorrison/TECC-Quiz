@@ -45,8 +45,8 @@ class Menu extends React.Component {
       .catch(console.error.bind(console));
   }
 
-  setUserAwards = (awards, uid) => {
-    console.error(uid, awards);
+  setUserAwards = (awards, currentUser) => {
+    console.error(currentUser, awards);
   };
 
   render () {
