@@ -46,7 +46,7 @@ class Menu extends React.Component {
   }
 
   setUserAwards = (awards, currentUser) => {
-    console.error(currentUser, awards);
+    console.error(currentUser, awards); // TODO: setState of userAwards
   };
 
   render () {

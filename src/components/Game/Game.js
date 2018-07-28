@@ -11,6 +11,7 @@ import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
 import helpers from '../../helpers';
 import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
+import userRequests from '../../firebaseRequests/users';
 
 ReactModal.setAppElement('#root');
 
@@ -115,6 +116,20 @@ class Game extends React.Component {
       .catch(console.error.bind(console));
   };
 
+  updateUser = (newUserPoints) => {
+    const uid = authRequests.getUid();
+    userRequests
+      .getRequest()
+      .then((users) => {
+        const currentUser = users.filter(user => user.id === uid)[0];
+        const newUser = {...currentUser};
+        currentUser.points = currentUser.points || 0;
+        newUser.points = currentUser.points + newUserPoints;
+        userRequests.putRequest(newUser.fbKey, newUser);
+      })
+      .catch(console.error.bind(console));
+  };
+
   nextQuestion = (nextId) => {
     this.setState({ questionId: nextId, nextQuestionNum: this.state.nextQuestionNum + 1});
   };
@@ -128,16 +143,19 @@ class Game extends React.Component {
     const answerCorrect = e.target.dataset.iscorrect === 'true';
     const lastQuestion = filteredQuestions[0] === undefined;
     const gameQuestion = {};
+    let pointsToAdd = 0;
 
     if (answerCorrect && lastQuestion) {
       // update game and fire hero
       updatedGame.isSaved = true;
       updatedGame.finalTime = Date.now();
       updatedGame.points += questionPoints;
+      pointsToAdd += questionPoints;
 
       this.updateGame(updatedGame);
       this.hero();
       gameQuestion.isCorrect = true;
+      this.updateUser(pointsToAdd);
     } else if (!answerCorrect && !lastQuestion) {
       // change time and next question
       const nextId = filteredQuestions[0].id;
@@ -148,6 +166,7 @@ class Game extends React.Component {
       // update game and next question
       const nextId = filteredQuestions[0].id;
       updatedGame.points += questionPoints;
+      pointsToAdd += questionPoints;
 
       this.updateGame(updatedGame);
       this.nextQuestion(nextId);
@@ -159,6 +178,7 @@ class Game extends React.Component {
       this.changeTime(true);
       this.updateGame(updatedGame);
       gameQuestion.isCorrect = false;
+      this.updateUser(pointsToAdd);
     }
     // Post to game questions collection
     gameQuestion.isCorrect = answerCorrect;
