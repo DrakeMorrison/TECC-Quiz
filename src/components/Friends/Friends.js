@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import friendRequests from '../../firebaseRequests/friends';
 import authRequests from '../../firebaseRequests/auth';
+import './Friends.css';
 
 class Friends extends React.Component {
   state = this.props.location.state;
