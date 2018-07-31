@@ -41,7 +41,7 @@ class Friends extends React.Component {
           <button className='btn btn-danger' onClick={this.deleteFriend}>Delete</button>
         </li>
       );
-    });
+    }).reverse();
     return (
       <div className='Friends'>
         <div className='container'>
