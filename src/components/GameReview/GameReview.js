@@ -37,21 +37,10 @@ class GameReview extends React.Component {
 
   render () {
     const questionList = this.state.matchingGameQuestions.map(question => {
-      if (question.isCorrect) {
-        return (
-          <li className='list-group-item text-success' key={question.id}>
-            <span className='glyphicon glyphicon-ok-circle'></span>
-            Question {question.questionNum}: {question.text}</li>
-        );
-      } else {
-        return (
-          <li className='list-group-item text-danger' key={question.id}>
-            <span className='glyphicon glyphicon-remove-circle'></span>
-            Question {question.questionNum}: {question.text}
-          </li>
-        );
-      }
-
+      return (
+        <li className='list-group-item' key={question.id}>
+          Question {question.questionNum}: {question.text}</li>
+      );
     });
 
     return (
