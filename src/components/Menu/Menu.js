@@ -77,31 +77,44 @@ class Menu extends React.Component {
           <p>Points: {game.points}</p>
         </Link>
       );
-    }).reverse();
+    }).reverse().slice(0, 10);
 
     const awardList = this.state.userAwards.map(award => {
       return (
-        <p key={award.id}>{award.name}</p>
+        <li className='list-group-item' key={award.id}>
+          <div className="media">
+            <div className="media-left">
+              <img className="media-object img-responsive" src={award.icon} alt="..."></img>
+            </div>
+            <div className="media-body">
+              <h4 className="media-heading">{award.name}</h4>
+              <p>Points: <span className='badge'>{award.pointValue}</span></p>
+              <p>Friends Saved: <span className='badge'>{award.numSaved}</span></p>
+            </div>
+          </div>
+        </li>
       );
     });
 
     return (
       <div className='Menu'>
         <Link className='col-xs-4 menu-friends' to={{pathname: '/friends', state: { friends: this.state.friends }}}>
-          <h4>Friends</h4>
+          <h3>Friends</h3>
           {friendNames}
         </Link>
         <div className='col-xs-4'>
           <h2>Menu</h2>
-          <Link className='btn btn-primary' to='/game/1'>Scenario 1</Link>
-          <Link className='btn btn-primary' to='/game/2'>Scenario 2</Link>
-          <button className='btn btn-danger' onClick={logoutClickEvent}>Logout</button>
-          <Link to='/'>Back</Link>
+          <Link className='btn btn-primary center-block' to='/game/1'>Scenario 1</Link>
+          <Link className='btn btn-primary center-block' to='/game/2'>Scenario 2</Link>
+          <button className='btn btn-danger center-block' onClick={logoutClickEvent}>Logout</button>
+          <Link className='center-block' to='/'>Back</Link>
           <h2>Awards</h2>
-          {awardList}
+          <ul className='list-group'>
+            {awardList}
+          </ul>
         </div>
         <div className='col-xs-4 menu-games'>
-          <h4>Games</h4>
+          <h3>Games</h3>
           {gameList}
         </div>
       </div>

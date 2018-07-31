@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import friendRequests from '../../firebaseRequests/friends';
 import authRequests from '../../firebaseRequests/auth';
+import './Friends.css';
 
 class Friends extends React.Component {
   state = this.props.location.state;
@@ -41,7 +42,7 @@ class Friends extends React.Component {
           <button className='btn btn-danger' onClick={this.deleteFriend}>Delete</button>
         </li>
       );
-    });
+    }).reverse();
     return (
       <div className='Friends'>
         <div className='container'>

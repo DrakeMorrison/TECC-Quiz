@@ -38,7 +38,7 @@ class GameReview extends React.Component {
   render () {
     const questionList = this.state.matchingGameQuestions.map(question => {
       return (
-        <li key={question.id}>Question {question.questionNum}: {question.text}</li>
+        <li className='list-group-item' key={question.id}>Question {question.questionNum}: {question.text}</li>
       );
     });
 
@@ -48,7 +48,7 @@ class GameReview extends React.Component {
         <Link to='/menu'>Back to Menu</Link>
         <p>Id: {this.state.currentGame.id}</p>
         <p>Points: {this.state.currentGame.points}</p>
-        <ul>
+        <ul className='list-group'>
           {questionList}
         </ul>
       </div>
