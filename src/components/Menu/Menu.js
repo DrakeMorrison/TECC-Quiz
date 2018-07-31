@@ -81,18 +81,16 @@ class Menu extends React.Component {
 
     const awardList = this.state.userAwards.map(award => {
       return (
-        <li className='list-group-item' key={award.id}>
-          <div className="media">
-            <div className="media-left">
-              <img className="media-object img-responsive" src={award.icon} alt="..."></img>
-            </div>
-            <div className="media-body">
-              <h4 className="media-heading">{award.name}</h4>
-              <p>Points: <span className='badge'>{award.pointValue}</span></p>
-              <p>Friends Saved: <span className='badge'>{award.numSaved}</span></p>
-            </div>
+        <div className="media" key={award.id}>
+          <div className="media-left">
+            <img className="media-object img-responsive" src={award.icon} alt="..."></img>
           </div>
-        </li>
+          <div className="media-body">
+            <h4 className="media-heading">{award.name}</h4>
+            <p>Points: <span className='badge'>{award.pointValue || 0}</span></p>
+            <p>Friends Saved: <span className='badge'>{award.numSaved || 0}</span></p>
+          </div>
+        </div>
       );
     });
 
@@ -104,14 +102,12 @@ class Menu extends React.Component {
         </Link>
         <div className='col-xs-4'>
           <h2>Menu</h2>
-          <Link className='btn btn-primary center-block' to='/game/1'>Scenario 1</Link>
-          <Link className='btn btn-primary center-block' to='/game/2'>Scenario 2</Link>
+          <Link className='btn btn-primary center-block' to='/game/1'>School Shooting</Link>
+          <Link className='btn btn-primary center-block' to='/game/2'>Burning Building</Link>
           <button className='btn btn-danger center-block' onClick={logoutClickEvent}>Logout</button>
           <Link className='center-block' to='/'>Back</Link>
           <h2>Awards</h2>
-          <ul className='list-group'>
-            {awardList}
-          </ul>
+          {awardList}
         </div>
         <div className='col-xs-4 menu-games'>
           <h3>Games</h3>
