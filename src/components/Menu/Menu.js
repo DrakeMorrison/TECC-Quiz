@@ -103,7 +103,7 @@ class Menu extends React.Component {
         <div className='col-xs-4'>
           <h2>Menu</h2>
           <Link className='btn btn-primary center-block' to='/game/1'>School Shooting</Link>
-          <Link className='btn btn-primary center-block' to='/game/2'>Burning Building</Link>
+          <Link className='btn btn-primary center-block hidden' to='/game/2'>Burning Building</Link>
           <button className='btn btn-danger center-block' onClick={logoutClickEvent}>Logout</button>
           <Link className='center-block' to='/'>Back</Link>
           <h2>Awards</h2>
