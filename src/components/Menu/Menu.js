@@ -18,6 +18,7 @@ class Menu extends React.Component {
     friends: [],
     games: [],
     userAwards: [],
+    currentUser: {},
   };
 
   componentDidMount () {
@@ -38,6 +39,7 @@ class Menu extends React.Component {
                   .then((users) => {
                     const currentUser = users.filter(user => user.id === uid)[0];
                     this.setUserAwards(awards, currentUser);
+                    this.setState({ currentUser });
                   });
               });
           });
@@ -66,29 +68,39 @@ class Menu extends React.Component {
 
     const friendNames = this.state.friends.map(friend => {
       return (
-        <p key={friend.id}>{friend.name}</p>
+        <blockquote key={friend.id}>
+          <p>{friend.name}</p>
+        </blockquote>
       );
     });
 
     const gameList = this.state.games.map(game => {
+      const goodGame = game.isSaved ? 'game btn btn-success' : 'game btn btn-danger';
       return (
-        <Link to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
+        <Link className={goodGame} to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
           <p>Creation Time: {game.creationTime}</p>
+          {/* TODO: import MomentJS for gameTime */}
           <p>Points: {game.points}</p>
         </Link>
       );
-    }).reverse().slice(0, 10);
+    }).reverse().slice(0, 5);
 
     const awardList = this.state.userAwards.map(award => {
+
+      const pointsOrFriends = award.pointAward ? (
+        <p>You Have Achieved At Least <span className='badge'>{award.pointValue}</span> Points!</p>
+      ) : (
+        <p>Congratulations! You Have Saved <span className='badge'>{award.numSaved}</span> Of Your Friends!</p>
+      );
+
       return (
-        <div className="media" key={award.id}>
+        <div className="media well" key={award.id}>
           <div className="media-left">
             <img className="media-object img-responsive" src={award.icon} alt="..."></img>
           </div>
           <div className="media-body">
             <h4 className="media-heading">{award.name}</h4>
-            <p>Points: <span className='badge'>{award.pointValue || 0}</span></p>
-            <p>Friends Saved: <span className='badge'>{award.numSaved || 0}</span></p>
+            {pointsOrFriends}
           </div>
         </div>
       );
@@ -97,15 +109,19 @@ class Menu extends React.Component {
     return (
       <div className='Menu'>
         <Link className='col-xs-4 menu-friends' to={{pathname: '/friends', state: { friends: this.state.friends }}}>
-          <h3>Friends</h3>
+          <h3 className='linkHeader'>Friends</h3>
           {friendNames}
         </Link>
         <div className='col-xs-4'>
-          <h2>Menu</h2>
-          <Link className='btn btn-primary center-block' to='/game/1'>School Shooting</Link>
+          <div className='stats'>
+            <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
+            <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
+            {/* Progress Bar */}
+          </div>
+
+          <Link className='btn btn-primary center-block' to='/game/1'>Keep Your Friend Alive During A Shooting</Link>
           <Link className='btn btn-primary center-block hidden' to='/game/2'>Burning Building</Link>
           <button className='btn btn-danger center-block' onClick={logoutClickEvent}>Logout</button>
-          <Link className='center-block' to='/'>Back</Link>
           <h2>Awards</h2>
           {awardList}
         </div>

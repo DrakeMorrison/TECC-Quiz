@@ -84,7 +84,11 @@ class App extends Component {
           <div className='container'>
             <div className='row'>
               <Switch>
-                <Route path='/' exact component={Home}/>
+                <Route
+                  path='/'
+                  exact
+                  component={Home}
+                />
                 <PublicRoute
                   path='/register'
                   authed={this.state.authed}
