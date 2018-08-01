@@ -37,10 +37,10 @@ class Friends extends React.Component {
   render () {
     const friendNames = this.state.friends.map(friend => {
       return (
-        <li key={friend.id} data-id={friend.id} className='list-group-item'>
-          <p>{friend.name}</p>
+        <div key={friend.id} data-id={friend.id} className='well well-sm'>
+          <h4>{friend.name}</h4>
           <button className='btn btn-danger' onClick={this.deleteFriend}>Delete</button>
-        </li>
+        </div>
       );
     }).reverse();
     return (
@@ -54,9 +54,9 @@ class Friends extends React.Component {
               <button className="btn btn-success" type="button" onClick={this.addFriend}>Add Friend</button>
             </span>
           </div>
-          <ul className='list-group col-xs-12 col-sm-6 col-sm-offset-3'>
+          <div className='col-xs-12 col-sm-6 col-sm-offset-3'>
             {friendNames}
-          </ul>
+          </div>
           <Link to='/menu'>Back to Menu</Link>
         </div>
       </div>
