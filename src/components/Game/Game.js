@@ -25,7 +25,7 @@ class Game extends React.Component {
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
-    startTime: Date.now() + 30000, // 30 seconds to finish game
+    startTime: Date.now() + 90000, // 30 seconds to finish game
     gameIsWon: false,
     showModal: false,
   };
@@ -61,7 +61,7 @@ class Game extends React.Component {
                 this.setState({ questions });
                 const friendlyQuestionsAndAnswers = helpers.replaceFriendName({ questions, answers, friends });
                 this.setState({ answers: friendlyQuestionsAndAnswers.answers });
-                this.setState({ friends: friendlyQuestionsAndAnswers.friends });
+                this.setState({ questions: friendlyQuestionsAndAnswers.questions });
 
                 gameRequests
                   .postRequest(newGameObj)
