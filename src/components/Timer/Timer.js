@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Countdown from 'react-countdown-now';
+import Moment from 'moment';
+// import Countdown from 'react-countdown-now';
+import MomentCountdown from 'react-moment-countdown';
 
 class Timer extends React.Component {
   static propTypes = {
@@ -11,10 +12,11 @@ class Timer extends React.Component {
 
   render () {
     const {startTime, gameOver} = this.props;
+    const dateInFuture = Moment(startTime, 'x');
 
     return (
       <div className='Timer'>
-        <Countdown
+        {/* <Countdown
           date={startTime}
           intervalDelay={0}
           precision={1}
@@ -22,7 +24,12 @@ class Timer extends React.Component {
           onComplete={gameOver}
         >
           <div className='jumbotron'><h2>Game Over</h2></div>
-        </Countdown>
+        </Countdown> */}
+        <MomentCountdown
+          toDate={dateInFuture}
+          onCountdownEnd={gameOver}
+        >
+        </MomentCountdown>
       </div>
     );
   };

@@ -25,7 +25,7 @@ class Game extends React.Component {
     questionId: '',
     scenarioId: 0,
     nextQuestionNum: 2,
-    startTime: Date.now() + 90000, // 30 seconds to finish game
+    startTime: Date.now() + 30000, // 30 seconds to finish game
     gameIsWon: false,
     showModal: false,
   };
