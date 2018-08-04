@@ -77,7 +77,7 @@ class Game extends React.Component {
   }
 
   changeTime = (isLastQuestion) => { // reduce time left by 10 seconds on a wrong click
-    const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000; // TODO: not working
+    const reducedTime = (document.getElementById('timer-value').dataset.time * 1) - 10000;
     if (reducedTime > 0 && isLastQuestion) { // last wrong question was not deadly
       this.hero();
     } else {

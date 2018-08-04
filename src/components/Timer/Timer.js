@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Moment from 'moment';
-import MomentCountdown from 'react-moment-countdown';
+// import Moment from 'moment';
+// import MomentCountdown from 'react-moment-countdown';
+import Countdown from 'react-countdown-now';
+
+import helper from '../../helpers';
 
 class Timer extends React.Component {
   static propTypes = {
@@ -11,25 +14,25 @@ class Timer extends React.Component {
 
   render () {
     const {startTime, gameOver} = this.props;
-    const dateInFuture = Moment(startTime, 'x');
+    // const dateInFuture = Moment(startTime, 'x');
 
     return (
       <div className='Timer'>
-        {/* <Countdown
+        <Countdown
           date={startTime}
           intervalDelay={0}
           precision={1}
-          renderer={props => <div id='timer-value'>{props.total}</div>}
+          renderer={props => <div id='timer-value' data-time={props.total}>{helper.formatTime(props.total)}</div>} // TODO: format time
           onComplete={gameOver}
         >
           <div className='jumbotron'><h2>Game Over</h2></div>
-        </Countdown> */}
-        <MomentCountdown
+        </Countdown>
+        {/* <MomentCountdown
           toDate={dateInFuture}
           onCountdownEnd={gameOver}
-          targetFormatMask='ss'
+          targetFormatMask='ss:ms'
         >
-        </MomentCountdown>
+        </MomentCountdown> */}
       </div>
     );
   };

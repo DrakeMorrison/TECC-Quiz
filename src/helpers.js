@@ -37,4 +37,16 @@ const getClosestClass = function (elem, selectedClass) {
   return null;
 };
 
-export default { replaceFriendName, getClosestClass };
+const formatTime = (timeNumber) => {
+  const timeString = timeNumber.toString();
+  let formattedTime = timeString;
+  console.error(timeNumber);
+  if (timeString.length < 5) {
+    formattedTime = timeString.slice(0, 1) + '.' + timeString.slice(1,2);
+  } else {
+    formattedTime = timeString.slice(0, 2) + '.' + timeString.slice(2, 3);
+  }
+  return formattedTime;
+};
+
+export default { replaceFriendName, getClosestClass, formatTime };
