@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
@@ -78,12 +79,11 @@ class Menu extends React.Component {
       const goodGame = game.isSaved ? 'game btn btn-success' : 'game btn btn-danger';
       return (
         <Link className={goodGame} to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
-          <p>Creation Time: {game.creationTime}</p>
-          {/* TODO: import MomentJS for gameTime */}
+          <p>Finish Time: {Moment(game.finalTime, 'x').fromNow()}</p>
           <p>Points: {game.points}</p>
         </Link>
       );
-    }).reverse().slice(0, 5);
+    }).slice(0, 5);
 
     const awardList = this.state.userAwards.map(award => {
 
@@ -116,7 +116,7 @@ class Menu extends React.Component {
           <div className='stats'>
             <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
             <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
-            {/* Progress Bar */}
+            {/* Progress Bar TODO*/}
           </div>
 
           <Link className='btn btn-primary center-block' to='/game/1'>Keep Your Friend Alive During A Shooting</Link>

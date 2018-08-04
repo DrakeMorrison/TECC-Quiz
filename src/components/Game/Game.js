@@ -77,7 +77,7 @@ class Game extends React.Component {
   }
 
   changeTime = (isLastQuestion) => { // reduce time left by 10 seconds on a wrong click
-    const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000;
+    const reducedTime = (document.getElementById('timer-value').innerText * 1) - 10000; // TODO: not working
     if (reducedTime > 0 && isLastQuestion) { // last wrong question was not deadly
       this.hero();
     } else {
@@ -152,7 +152,8 @@ class Game extends React.Component {
     const questionsArray = Object.values(this.state.questions);
     const filteredQuestions = questionsArray.filter(question => question.questionNum === this.state.nextQuestionNum);
     const submittedQuestion = this.state.questions.filter(question => question.id === this.state.questionId)[0];
-    const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
+    // const questionPoints = helpers.getClosestClass(e.target,'Game').children[1].children[1].getAttribute('points') * 1;
+    const questionPoints  = submittedQuestion.pointValue;
     const answerCorrect = e.target.dataset.iscorrect === 'true';
     const lastQuestion = filteredQuestions[0] === undefined;
     const gameQuestion = {};
@@ -214,7 +215,6 @@ class Game extends React.Component {
   render () {
     return (
       <div className='Game'>
-        <h2>Game</h2>
         <Query
           className='col-xs-9'
           questions={this.state.questions}

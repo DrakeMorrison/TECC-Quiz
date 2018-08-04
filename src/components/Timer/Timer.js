@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
-// import Countdown from 'react-countdown-now';
 import MomentCountdown from 'react-moment-countdown';
 
 class Timer extends React.Component {
@@ -28,6 +27,7 @@ class Timer extends React.Component {
         <MomentCountdown
           toDate={dateInFuture}
           onCountdownEnd={gameOver}
+          targetFormatMask='ss'
         >
         </MomentCountdown>
       </div>
