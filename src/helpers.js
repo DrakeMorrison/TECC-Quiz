@@ -40,7 +40,6 @@ const getClosestClass = function (elem, selectedClass) {
 const formatTime = (timeNumber) => {
   const timeString = timeNumber.toString();
   let formattedTime = timeString;
-  console.error(timeNumber);
   if (timeString.length < 5) {
     formattedTime = timeString.slice(0, 1) + '.' + timeString.slice(1,2);
   } else {

@@ -83,7 +83,7 @@ class Menu extends React.Component {
           <p>Points: {game.points}</p>
         </Link>
       );
-    }).slice(0, 5);
+    }).reverse().slice(0, 5);
 
     const awardList = this.state.userAwards.map(award => {
 
