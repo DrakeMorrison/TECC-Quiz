@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
@@ -8,6 +9,7 @@ import gameRequests from '../../firebaseRequests/games';
 import awardRequests from '../../firebaseRequests/awards';
 import userRequests from '../../firebaseRequests/users';
 import './Menu.css';
+import helpers from '../../helpers';
 
 class Menu extends React.Component {
   static propTypes = {
@@ -39,7 +41,10 @@ class Menu extends React.Component {
                   .then((users) => {
                     const currentUser = users.filter(user => user.id === uid)[0];
                     this.setUserAwards(awards, currentUser);
-                    this.setState({ currentUser });
+                    this.setState({ currentUser }, () => {
+                      document.getElementById('progress-bar').style.minWidth = '20%';
+                      document.getElementById('progress-bar').style.width = helpers.awardProgress(awards, currentUser);
+                    });
                   });
               });
           });
@@ -78,8 +83,7 @@ class Menu extends React.Component {
       const goodGame = game.isSaved ? 'game btn btn-success' : 'game btn btn-danger';
       return (
         <Link className={goodGame} to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
-          <p>Creation Time: {game.creationTime}</p>
-          {/* TODO: import MomentJS for gameTime */}
+          <p>Finish Time: {Moment(game.finalTime, 'x').fromNow()}</p>
           <p>Points: {game.points}</p>
         </Link>
       );
@@ -116,7 +120,13 @@ class Menu extends React.Component {
           <div className='stats'>
             <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
             <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
-            {/* Progress Bar */}
+
+            <div className="progress">
+              <div id='progress-bar' className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                <span className="sr-only">Progress To Next Award</span>
+                Next Award
+              </div>
+            </div>
           </div>
 
           <Link className='btn btn-primary center-block' to='/game/1'>Keep Your Friend Alive During A Shooting</Link>

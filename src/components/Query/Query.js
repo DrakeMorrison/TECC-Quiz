@@ -13,14 +13,15 @@ class Query extends React.Component {
     const query = questions.filter(question => question.id === questionId)
       .map(question => {
         return (
-          <p key={question.id} points={question.pointValue * 1}>{question.text}</p>
+          <h3 key={question.id} points={question.pointValue * 1}>{question.text}</h3>
         );
       });
 
     return (
       <div className='Query'>
-        <h2>Query</h2>
-        {query}
+        <div className='page-header'>
+          {query}
+        </div>
       </div>
     );
   };
