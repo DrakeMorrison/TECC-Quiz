@@ -90,6 +90,20 @@
       "pointValue": null,
       "pointAward": false,
       "numSaved": 3
+    },
+    {
+      "name": "90 Hero",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": 90,
+      "pointAward": true,
+      "numSaved": null
+    },
+    {
+      "name": "15 Hero",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": 15,
+      "pointAward": true,
+      "numSaved": null
     }
   ],
   "game": [

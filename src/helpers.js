@@ -48,4 +48,23 @@ const formatTime = (timeNumber) => {
   return formattedTime;
 };
 
-export default { replaceFriendName, getClosestClass, formatTime };
+const awardProgress = (awards, user) => {
+  const filteredAwards = awards.filter(award => {
+    if (award.pointAward && award.pointValue > (user.points || 0)) {
+      return true;
+    }
+    return false;
+  });
+
+  const sortedAwards = filteredAwards.sort(((a, b) => {
+    return a.pointValue - b.pointValue;
+  }));
+
+  const nextAward = sortedAwards[0];
+
+  const progressRatio = (user.points / nextAward.pointValue) * 100;
+
+  return progressRatio.toString() + '%';
+};
+
+export default { replaceFriendName, getClosestClass, formatTime, awardProgress };

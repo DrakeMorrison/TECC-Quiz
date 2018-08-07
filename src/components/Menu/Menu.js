@@ -9,6 +9,7 @@ import gameRequests from '../../firebaseRequests/games';
 import awardRequests from '../../firebaseRequests/awards';
 import userRequests from '../../firebaseRequests/users';
 import './Menu.css';
+import helpers from '../../helpers';
 
 class Menu extends React.Component {
   static propTypes = {
@@ -40,7 +41,10 @@ class Menu extends React.Component {
                   .then((users) => {
                     const currentUser = users.filter(user => user.id === uid)[0];
                     this.setUserAwards(awards, currentUser);
-                    this.setState({ currentUser });
+                    this.setState({ currentUser }, () => {
+                      document.getElementById('progress-bar').style.minWidth = '20%';
+                      document.getElementById('progress-bar').style.width = helpers.awardProgress(awards, currentUser);
+                    });
                   });
               });
           });
@@ -116,7 +120,13 @@ class Menu extends React.Component {
           <div className='stats'>
             <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
             <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
-            {/* Progress Bar TODO*/}
+
+            <div className="progress">
+              <div id='progress-bar' className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                <span className="sr-only">Progress To Next Award</span>
+                Next Award
+              </div>
+            </div>
           </div>
 
           <Link className='btn btn-primary center-block' to='/game/1'>Keep Your Friend Alive During A Shooting</Link>
