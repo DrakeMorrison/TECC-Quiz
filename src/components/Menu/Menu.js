@@ -100,7 +100,6 @@ class Menu extends React.Component {
       return (
         <div className="media well" key={award.id}>
           <div className="media-left">
-            <img className="media-object img-responsive" src={award.icon} alt="..."></img>
           </div>
           <div className="media-body">
             <h4 className="media-heading">{award.name}</h4>
