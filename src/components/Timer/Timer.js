@@ -19,7 +19,7 @@ class Timer extends React.Component {
           date={startTime}
           intervalDelay={0}
           precision={1}
-          renderer={props => <div id='timer-value' data-time={props.total}>{helper.formatTime(props.total)}</div>}
+          renderer={props => <div id='timer-value' class='h1' data-time={props.total}>{helper.formatTime(props.total)}</div>}
           onComplete={gameOver}
         >
           <div className='jumbotron'><h2>Game Over</h2></div>
