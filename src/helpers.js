@@ -1,6 +1,7 @@
 const replaceFriendName = ({questions, answers, friends}) => {
   if (friends[0] !== undefined) {
-    const friendName = friends[0].name;
+    const friendlyName = friends[0].name;
+    const friendName = friendlyName.charAt(0).toUpperCase() + friendlyName.substring(1);
 
     const friendlyAnswers = answers.map(answer => {
       const newAnswerText = answer.answerText.replace(/(your friend)/gi, friendName);
@@ -62,9 +63,13 @@ const awardProgress = (awards, user) => {
 
   const nextAward = sortedAwards[0];
 
-  const progressRatio = (user.points / nextAward.pointValue) * 100;
+  if (nextAward !== undefined) {
+    const progressRatio = (user.points / nextAward.pointValue) * 100;
 
-  return progressRatio.toString() + '%';
+    return progressRatio.toString() + '%';
+  } else {
+    return '100%';
+  }
 };
 
 export default { replaceFriendName, getClosestClass, formatTime, awardProgress };

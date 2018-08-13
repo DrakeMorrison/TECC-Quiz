@@ -185,6 +185,7 @@ class Game extends React.Component {
       this.updateGame(updatedGame);
       this.nextQuestion(nextId);
       gameQuestion.isCorrect = true;
+      this.updateUserPoints(pointsToAdd);
     } else if (!answerCorrect && lastQuestion) {
       // change time and update game
       updatedGame.finalTime = Date.now();
