@@ -39,8 +39,16 @@ class GameReview extends React.Component {
   render () {
     const questionList = this.state.matchingGameQuestions.map(question => {
       return (
-        <li className='list-group-item' key={question.id}>
-          Question {question.questionNum}: {question.text}</li>
+        <div key={question.id} className='col-sm-4'>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h3 className="panel-title">Question {question.questionNum}</h3>
+            </div>
+            <div className="panel-body">
+              {question.text}
+            </div>
+          </div>
+        </div>
       );
     });
 
@@ -50,9 +58,7 @@ class GameReview extends React.Component {
         <Link to='/menu'>Back to Menu</Link>
         <p>Points: {this.state.currentGame.points}</p>
         <p>Creation Time: {Moment(this.state.currentGame.creationTime, 'x').fromNow()}</p>
-        <ul className='list-group'>
-          {questionList}
-        </ul>
+        {questionList}
       </div>
     );
   };

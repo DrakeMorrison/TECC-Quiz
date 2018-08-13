@@ -15,7 +15,15 @@ class Answer extends React.Component {
 
     const allAnswers = questionAnswers.map((answer) => {
       return (
-        <button className='btn btn-info col-sm-4' data-iscorrect={answer.isCorrect} key={answer.id} onClick={checkAnswer}>{answer.answerText}</button>
+        <div className="panel panel-default col-sm-4"
+          key={answer.id}
+          onClick={checkAnswer}
+          data-iscorrect={answer.isCorrect}
+        >
+          <div className="panel-body">
+            {answer.answerText}
+          </div>
+        </div>
       );
     });
 
