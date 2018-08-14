@@ -71,7 +71,11 @@ class Menu extends React.Component {
       authRequests.logoutUser();
     };
 
-    const friendNames = this.state.friends.map(friend => {
+    // const friendList = this.props.location.state.isRegistering ? this.props.location.state.friends : this.state.friends;TODO
+
+    const friendList = this.state.friends;
+
+    const friendNames = friendList.map(friend => {
       return (
         <blockquote key={friend.id}>
           <p>{friend.name}</p>
@@ -117,8 +121,8 @@ class Menu extends React.Component {
         </Link>
         <div className='col-xs-4'>
           <div className='stats'>
-            <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
-            <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
+            <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved || 0}</span>
+            <span className='h4 stats'>Total Points: {this.state.currentUser.points || 0}</span>
 
             <div className="progress">
               <div id='progress-bar' className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">

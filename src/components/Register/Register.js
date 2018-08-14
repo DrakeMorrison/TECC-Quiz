@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import authRequests from '../../firebaseRequests/auth';
 import friendRequests from '../../firebaseRequests/friends';
@@ -37,8 +37,16 @@ class Register extends React.Component {
                 id: authRequests.getUid(),
                 friendsSaved: 0,
               })
-              .then(() => {
-                this.props.history.push('/menu');
+              .then((user) => {
+                // this.props.history.push('/menu'); TODO
+                return <Redirect to={{
+                  pathname: '/menu',
+                  state: {
+                    currentUser: user,
+                    friends: [friend],
+                    isRegistering: true,
+                  },
+                }} />;
               });
           });
       })
