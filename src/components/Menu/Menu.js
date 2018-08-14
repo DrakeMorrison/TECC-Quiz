@@ -71,11 +71,7 @@ class Menu extends React.Component {
       authRequests.logoutUser();
     };
 
-    // const friendList = this.props.location.state.isRegistering ? this.props.location.state.friends : this.state.friends;TODO
-
-    const friendList = this.state.friends;
-
-    const friendNames = friendList.map(friend => {
+    const friendNames = this.state.friends.map(friend => {
       return (
         <blockquote key={friend.id}>
           <p>{friend.name}</p>

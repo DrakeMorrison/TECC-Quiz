@@ -18,9 +18,8 @@ class Answer extends React.Component {
         <div className="panel panel-default col-sm-4"
           key={answer.id}
           onClick={checkAnswer}
-          data-iscorrect={answer.isCorrect}
         >
-          <div className="panel-body">
+          <div className="panel-body" data-iscorrect={answer.isCorrect}>
             {answer.answerText}
           </div>
         </div>
