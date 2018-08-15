@@ -12,17 +12,17 @@
 
 ### Technologies Used:
 > 1. HTML5, CSS, JavaScript
-> 3. [SASS 0.5.0](http://sass-lang.com/): All customized styling
-> 5. [React 16.4.1](): Core app functionality
-> 6. [React Router 4.3.1](): App navigation
-> 8. [Firebase 5.2.0](https://www.firebase.com/) : Authentication, storage for survey data
-> 9. [MomentJS](http://momentjs.com/) : Time displays
+> 1. [SASS 0.5.0](http://sass-lang.com/): All customized styling
+> 1. [React 16.4.1](https://reactjs.org/): Core app functionality
+> 1. [React Router 4.3.1](https://reacttraining.com/react-router/): App navigation
+> 1. [Firebase 5.2.0](https://www.firebase.com/) : Authentication, storage for survey data
+> 1. [MomentJS](http://momentjs.com/) : Time displays
+> 1. [React Modal](http://reactcommunity.org/react-modal/) : End-of-game modals
 
 
 
 ### Description:
-##### "Oral Hygiene Promotion App" for children
-> Parents must create an account for access to the app. They are able to add up to 4 children associated with their account. These accounts can be deleted or added at any point.
+##### "Timed First-Aid Quiz"
 
 > Child users log in each time they intend to brush their teeth. They can either view their previous brushing records or create a new brushing record.
 
