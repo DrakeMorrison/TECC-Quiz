@@ -100,7 +100,6 @@ class Menu extends React.Component {
       return (
         <div className="media well" key={award.id}>
           <div className="media-left">
-            <img className="media-object img-responsive" src={award.icon} alt="..."></img>
           </div>
           <div className="media-body">
             <h4 className="media-heading">{award.name}</h4>
@@ -118,8 +117,8 @@ class Menu extends React.Component {
         </Link>
         <div className='col-xs-4'>
           <div className='stats'>
-            <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved}</span>
-            <span className='h4 stats'>Total Points: {this.state.currentUser.points}</span>
+            <span className='h4 stats'>Total Friends Saved: {this.state.currentUser.friendsSaved || 0}</span>
+            <span className='h4 stats'>Total Points: {this.state.currentUser.points || 0}</span>
 
             <div className="progress">
               <div id='progress-bar' className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
