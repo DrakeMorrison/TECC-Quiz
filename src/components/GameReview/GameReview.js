@@ -4,6 +4,7 @@ import Moment from 'moment';
 
 import gameQuestionsRequests from '../../firebaseRequests/gameQuestions';
 import questionRequests from '../../firebaseRequests/questions';
+import answerRequests from '../../firebaseRequests/answers';
 
 class GameReview extends React.Component {
   state = {
@@ -12,6 +13,7 @@ class GameReview extends React.Component {
     currentGameId: '',
     currentGame: {},
     matchingGameQuestions: [],
+    answers: [],
   };
 
   componentDidMount () {
@@ -27,6 +29,11 @@ class GameReview extends React.Component {
                 res.id = gameQuestion.questionId;
                 allQuestions.push(res);
                 this.setState({ matchingGameQuestions: allQuestions });
+                answerRequests
+                  .getRequest()
+                  .then(((res) => {
+                    this.setState({answers: res});
+                  }));
               });
           });
           const currentGame = this.props.location.state.games.filter(game => game.id === this.state.currentGameId)[0];
@@ -43,6 +50,13 @@ class GameReview extends React.Component {
     });
 
     const questionList = sortedQuestions.map(question => {
+      const answers = this.state.answers;
+      const questionAnswers = answers.filter(answer => answer.questionId === question.questionNum);
+
+      questionAnswers.map((answer) => {
+        // TODO
+      });
+
       return (
         <div key={question.id} className='col-sm-4'>
           <div className="panel panel-default">
@@ -58,7 +72,7 @@ class GameReview extends React.Component {
     });
 
     return (
-      <div className='GameReview'>
+      <div className={this.state.currentGame.isSaved ? 'GameReview bg-success' : 'GameReview bg-danger'}>
         <h2>GameReview</h2>
         <Link to='/menu'>Back to Menu</Link>
         <p>Points: {this.state.currentGame.points}</p>
