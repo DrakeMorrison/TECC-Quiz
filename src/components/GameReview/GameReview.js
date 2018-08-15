@@ -37,7 +37,12 @@ class GameReview extends React.Component {
   }
 
   render () {
-    const questionList = this.state.matchingGameQuestions.map(question => { // TODO: sort list by questionNum
+
+    const sortedQuestions = this.state.matchingGameQuestions.sort((a, b) => {
+      return a.questionNum - b.questionNum;
+    });
+
+    const questionList = sortedQuestions.map(question => {
       return (
         <div key={question.id} className='col-sm-4'>
           <div className="panel panel-default">

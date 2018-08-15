@@ -79,7 +79,11 @@ class Menu extends React.Component {
       );
     });
 
-    const gameList = this.state.games.map(game => {
+    const sortedGames = this.state.games.sort((a, b) => {
+      return b.finalTime - a.finalTime;
+    }).slice(0, 5);
+
+    const gameList = sortedGames.map(game => {
       const goodGame = game.isSaved ? 'game btn btn-success' : 'game btn btn-danger';
       return (
         <Link className={goodGame} to={{ pathname: `completegame/${game.id}`, state: { games: this.state.games } }} key={game.id}>
@@ -87,7 +91,7 @@ class Menu extends React.Component {
           <p>Points: {game.points}</p>
         </Link>
       );
-    }).reverse().slice(0, 5);
+    });
 
     const awardList = this.state.userAwards.map(award => {
 
