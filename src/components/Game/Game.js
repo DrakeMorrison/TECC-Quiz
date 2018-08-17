@@ -238,7 +238,7 @@ class Game extends React.Component {
         >
           <h2>{this.state.gameIsWon ? 'You Saved Your Friend!' : 'Game Over'}</h2>
           {/* // TODO: bootstrap modal? */}
-          <p>{this.state.gameIsWon ? 'Congratulations' : ''}</p>
+          <p>{this.state.gameIsWon ? 'Congratulations' : 'Your Friend Bled out and died'}</p>
           <button onClick={this.closeModal}>Back To Menu</button>
         </ReactModal>
       </div>
