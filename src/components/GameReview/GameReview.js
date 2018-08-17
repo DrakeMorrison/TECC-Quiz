@@ -54,7 +54,7 @@ class GameReview extends React.Component {
       const questionAnswers = answers.filter(answer => answer.questionId === question.questionNum);
 
       questionAnswers.map((answer) => {
-        // TODO
+        // TODO add answers to questions.
       });
 
       return (
