@@ -120,7 +120,7 @@
     {
       "gameId": 0,
       "questionId": 0,
-      "isCorrect": true
+      "isCorrect": false
     }
   ],
   "scenarios": [
