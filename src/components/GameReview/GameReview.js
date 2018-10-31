@@ -50,12 +50,12 @@ class GameReview extends React.Component {
     });
 
     const questionList = sortedQuestions.map(question => {
-      const answers = this.state.answers;
-      const questionAnswers = answers.filter(answer => answer.questionId === question.questionNum);
+      // const answers = this.state.answers;
+      // const questionAnswers = answers.filter(answer => answer.questionId === question.questionNum);
 
-      questionAnswers.map((answer) => {
-        // TODO add answers to questions.
-      });
+      // questionAnswers.map((answer) => {
+      //   // TODO add answers to questions.
+      // });
 
       return (
         <div key={question.id} className='col-sm-4'>
