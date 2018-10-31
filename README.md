@@ -24,6 +24,8 @@
 ### Description:
 ##### "Timed First-Aid Quiz"
 
+> Intended primarily for Non-Tactical Emergency Personnel during high-variability and high-risk engagements. Not intended for Civilians.
+
 > Users log in each time they wish to save a friend. They can view the results of previous games and see their friend list.
 
 > When they start a new game, they are presented with a question and several answers they have to pick between while they are timed.
@@ -32,38 +34,26 @@
 
 > As they succeed and keep their friends alive, they accumulate points and awards for their rescues.
 
-##### Description: Parent Registration
-<img src="" width="200">
-<img src="" width="200">
+##### Launch Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/launchpage.png" width="200">
 
-##### Description: Parent Login
-<img src="" width="400">
+##### Main Menu
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/menu.png" width="400">
 
-##### Description: Account Landing
-<img src="" width="400">
+##### Friends Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/friendsPage.png" width="400">
 
-##### Description: Child Registration
-<img src="" width="200">
-<img src="" width="200">
+##### Game Review Page
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/gameReview.png" width="200">
 
-##### Description: Child Account Features
-<img src="" width="200">
-<img src="" width="200">
+##### The Questions
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/questionPage.png" width="200">
 
-##### Description: Child Landing
-<img src="" width="400">
+##### Rescue Succeeded!
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/success.png" width="400">
 
-##### Description: Child Brushing - Song Selection
-<img src="" width="200">
-<img src="" width="200">
-
-##### Description: Child Brushing - Slideshow
-<img src="" width="200">
-<img src="" width="200">
-
-##### Description: Child Brushing - Recording
-<img src="" width="200">
-<img src="" width="200">
+##### Rescue Failed!
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/Failure.png" width="200">
 
 
 
@@ -89,4 +79,7 @@
 [Drake Morrison](https://github.com/drakemorrison)
 
 
-### Credit Where Credit Is Due:
+### Inspiration for this project and more info:
+[Tactical Emergency Casualty Care](https://www.naemt.org/education/tecc)
+
+#### This information is for entertainment uses only. I am not responsible for any injuries or death that may occur when following the information within this application. If you wish to know more, I suggest you see if your local Law Enforcement holds classes on these subjects. I simply want to help people think through what they would do in an extreme situation beforehand so that they are better prepared and maybe increase their chances of surviving.
