@@ -1,0 +1,50 @@
+[debug] [2018-10-31T23:35:56.518Z] ----------------------------------------------------------------------
+[debug] [2018-10-31T23:35:56.520Z] Command:       /usr/local/Cellar/node/9.5.0/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-10-31T23:35:56.520Z] CLI Version:   3.19.1
+[debug] [2018-10-31T23:35:56.521Z] Platform:      darwin
+[debug] [2018-10-31T23:35:56.521Z] Node Version:  v9.5.0
+[debug] [2018-10-31T23:35:56.521Z] Time:          Wed Oct 31 2018 18:35:56 GMT-0500 (CDT)
+[debug] [2018-10-31T23:35:56.521Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-10-31T23:35:56.538Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-10-31T23:35:56.538Z] > authorizing via signed-in user
+[debug] [2018-10-31T23:35:56.540Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-10-31T23:35:56.540Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/nxgPbqzWDolF3axhfbjfmVzzBtSs1BD2YJUOT9-_hVM',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Oct 31 2018 18:35:56 GMT-0500 (CDT)
+[debug] [2018-10-31T23:35:56.781Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-31T23:35:56.802Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/friend-savior  
+  
+ Wed Oct 31 2018 18:35:56 GMT-0500 (CDT)
+[debug] [2018-10-31T23:35:57.229Z] <<< HTTP RESPONSE 200
+[debug] [2018-10-31T23:35:57.230Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/friend-savior/tokens  
+  
+ Wed Oct 31 2018 18:35:57 GMT-0500 (CDT)
+[debug] [2018-10-31T23:35:57.881Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'friend-savior'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing build directory for upload...
+[debug] [2018-10-31T23:35:58.757Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/friend-savior/uploads/-LQBTx1STmRYw6q59IkT?fileCount=9&message=  
+  
+ Wed Oct 31 2018 18:35:58 GMT-0500 (CDT)
+[debug] [2018-10-31T23:35:59.995Z] <<< HTTP RESPONSE 410
+[debug] [2018-10-31T23:35:59.995Z] <<< HTTP RESPONSE BODY undefined
+[debug] [2018-10-31T23:35:59.997Z] TypeError: Cannot read property 'error' of undefined
+    at module.exports (/usr/local/lib/node_modules/firebase-tools/lib/responseToError.js:10:13)
+    at Request._callback (/usr/local/lib/node_modules/firebase-tools/lib/api.js:47:25)
+    at Request.self.callback (/usr/local/lib/node_modules/firebase-tools/node_modules/request/request.js:185:22)
+    at Request.emit (events.js:160:13)
+    at Request.<anonymous> (/usr/local/lib/node_modules/firebase-tools/node_modules/request/request.js:1157:10)
+    at Request.emit (events.js:160:13)
+    at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/firebase-tools/node_modules/request/request.js:1079:12)
+    at Object.onceWrapper (events.js:255:19)
+    at IncomingMessage.emit (events.js:165:20)
+    at endReadableNT (_stream_readable.js:1101:12)
+[error] 
+[error] Error: An unexpected error has occurred.

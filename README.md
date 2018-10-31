@@ -35,33 +35,33 @@
 > As they succeed and keep their friends alive, they accumulate points and awards for their rescues.
 
 ##### Launch Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/launchpage.png" width="200">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/launchpage.png">
 
 ##### Main Menu
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/menu.png" width="400">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/menu.png">
 
 ##### Friends Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/friendsPage.png" width="400">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/friendsPage.png">
 
 ##### Game Review Page
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/gameReview.png" width="200">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/gameReview.png">
 
 ##### The Questions
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/questionPage.png" width="200">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/questionPage.png">
 
 ##### Rescue Succeeded!
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/success.png" width="400">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/success.png">
 
 ##### Rescue Failed!
-<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/Failure.png" width="200">
+<img src="https://github.com/DrakeMorrison/TECC-Quiz/raw/master/screenshots/Failure.png">
 
 
 
 ### How to run:
 ```
-1. Go to: `https://www.npmjs.com/package/http-server` and install "http-server".
-2. Navigate to the project folder in command line interface and type: `http-server -p 8080`
-3. This will show at: `http://localhost:8080` in your internet browser.
+1. Clone this repo and navigate into the project folder in your terminal
+2. Type 'npm install' to download required dependencies.
+3. Type 'npm start' to start a local server with the application.
 ```
 ### Demo:
 [Preview the project here.](https://friend-savior.firebaseapp.com/)
