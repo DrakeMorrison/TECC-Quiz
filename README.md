@@ -24,13 +24,13 @@
 ### Description:
 ##### "Timed First-Aid Quiz"
 
-> Child users log in each time they intend to brush their teeth. They can either view their previous brushing records or create a new brushing record.
+> Users log in each time they wish to save a friend. They can view the results of previous games and see their friend list.
 
-> If child user opts to create a new brushing record, they are able to select 4 clips from a set of "mystery songs" to compile one 2-minute song. Once they have 4 selections, they are able to play their "custom" song.
+> When they start a new game, they are presented with a question and several answers they have to pick between while they are timed.
 
-> While the child user's "custom" song is playing, they receive step-by-step brushing instructions from an animated slideshow.
+> Should they answer correctly, the game asks them the next question. However, if they guess wrongly, they lose 10 seconds of time and still have to answer the next question!
 
-> Once the 2-minute animation and song duo is completed. The child receives a "sticker" for brushing. Brushing is limited to once per morning and once per evening.
+> As they succeed and keep their friends alive, they accumulate points and awards for their rescues.
 
 ##### Description: Parent Registration
 <img src="" width="200">
@@ -74,7 +74,7 @@
 3. This will show at: `http://localhost:8080` in your internet browser.
 ```
 ### Demo:
-[Preview the project here.]()
+[Preview the project here.](https://friend-savior.firebaseapp.com/)
 
 
 
@@ -86,7 +86,7 @@
 
 
 ### Contributors:
-[Drake Morrison](https://github.com/morecallan)
+[Drake Morrison](https://github.com/drakemorrison)
 
 
 ### Credit Where Credit Is Due:
