@@ -82,4 +82,4 @@
 ### Inspiration for this project and more info:
 [Tactical Emergency Casualty Care](https://www.naemt.org/education/tecc)
 
-#### This information is for entertainment uses only. I am not responsible for any injuries or death that may occur when following the information within this application. If you wish to know more, I suggest you see if your local Law Enforcement holds classes on these subjects. I simply want to help people think through what they would do in an extreme situation beforehand so that they are better prepared and maybe increase their chances of surviving.
+#### This information is for entertainment uses only. I am not responsible for any injuries or death that may occur when following the information within this application. If you wish to know more, I suggest you see if your local Law Enforcement and Firefighters holds classes on these subjects. I simply want to help people think through what they would do in an extreme situation beforehand so that they are better prepared and maybe increase their chances of surviving.
