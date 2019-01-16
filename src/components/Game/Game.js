@@ -236,9 +236,8 @@ class Game extends React.Component {
           isOpen={this.state.showModal}
           contentLabel='Minimal Modal Example'
         >
-          <h2>{this.state.gameIsWon ? 'You Saved Your Friend!' : 'Game Over'}</h2>
-          {/* // TODO: bootstrap modal? */}
-          <p>{this.state.gameIsWon ? 'Congratulations' : 'Your Friend Bled out and died'}</p>
+          <h2>{this.state.gameIsWon ? 'You Saved Your Friend!' : 'So Close...'}</h2>
+          <p>{this.state.gameIsWon ? 'You escaped! Your friend follows you out and the firefighters arrive. Congratulations!' : 'You fall unconscious, only to be woken by firefighters who saved you and your friend. Phew!'}</p>
           <button onClick={this.closeModal}>Back To Menu</button>
         </ReactModal>
       </div>

@@ -11,69 +11,69 @@
   ],
   "questions": [
     {
-      "text": "A shooting breaks out at school, you look next to you and your friend is shot in the leg!! What do you do?",
+      "text": "You wake up to the smell of smoke and dust. Feeling warmer than usual, you look around to notice a fire has broken out in your house while your friend was sleeping over!",
       "scenarioId": 1,
-      "pointValue": 10,
+      "pointValue": 30,
       "questionNum": 1
     },
     {
-      "text": "You look down, and your friend is bleeding out! What do you do?",
+      "text": "Crawling through the burning building you see a door in front of you. Heading that direction, you realize the ceiling in front of the door is about to fall. What do you do?",
       "scenarioId": 1,
       "pointValue": 20,
       "questionNum": 2
     },
     {
-      "text": "You look around and hear more gunshots, do you drag your friend outside? Or stay put and hope the shooter doesn't find you?",
+      "text": "The ceiling falls, narrowly missing you, and you keep on moving. Crawling along you see a fire extinguisher in the kitchen. Do you try and use it, or find your way out?",
       "scenarioId": 1,
-      "pointValue": 30,
+      "pointValue": 10,
       "questionNum": 3
     }
   ],
   "answers": [
     {
       "questionId": 0,
-      "answerText": "Drag your friend away from the shooting and behind a concrete wall",
+      "answerText": "Make your way to your friend, wake them up, and try to escape with them",
       "isCorrect": true
     },
     {
       "questionId": 0,
-      "answerText": "Leave your friend and run away as fast as possible",
+      "answerText": "Leave your friend to fend for themselves and try to escape alone",
       "isCorrect": false
     },
     {
       "questionId": 0,
-      "answerText": "Drop down where you are and help your friend.",
+      "answerText": "Text your friend, hoping they will wake up, and try to crawl out alone",
       "isCorrect": false
     },
     {
       "questionId": 1,
-      "answerText": "Run out to get help",
-      "isCorrect": false
-    },
-    {
-      "questionId": 1,
-      "answerText": "Take your belt and tighten it above the wound on your friend's leg to stop the bleeding.",
+      "answerText": "Crawl around a different way",
       "isCorrect": true
     },
     {
       "questionId": 1,
-      "answerText": "Call out for help while staying with your friend.",
+      "answerText": "Wait for the ceiling to fall",
+      "isCorrect": false
+    },
+    {
+      "questionId": 1,
+      "answerText": "Hurry through the door before the ceiling falls",
       "isCorrect": false
     },
     {
       "questionId": 2,
-      "answerText": "Stay put and hope the shooter doesn't find you.",
+      "answerText": "Stop, grab the extinguisher and try to start dousing the flames",
       "isCorrect": false
     },
     {
       "questionId": 2,
-      "answerText": "Drag your friend outside when the coast is clear.",
+      "answerText": "Grab the fire extinguisher just in case you need it to escape",
       "isCorrect": true
     },
     {
       "questionId": 2,
-      "answerText": "Leave your friend inside while you go outside for help.",
-      "isCorrect": false
+      "answerText": "Leave the fire extinguisher there",
+      "isCorrect": true
     }
   ],
   "awards": [
@@ -92,6 +92,34 @@
       "numSaved": 3
     },
     {
+      "name": "Savior of Five",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": null,
+      "pointAward": false,
+      "numSaved": 5
+    },
+    {
+      "name": "Savior of Ten",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": null,
+      "pointAward": false,
+      "numSaved": 10
+    },
+    {
+      "name": "Savior of Twenty",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": null,
+      "pointAward": false,
+      "numSaved": 20
+    },
+    {
+      "name": "Savior of Fifty",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": null,
+      "pointAward": false,
+      "numSaved": 50
+    },
+    {
       "name": "City Hero",
       "icon": "http://www.crazyimage.com",
       "pointValue": 90,
@@ -102,6 +130,13 @@
       "name": "Regional Hero",
       "icon": "http://www.crazyimage.com",
       "pointValue": 120,
+      "pointAward": true,
+      "numSaved": null
+    },
+    {
+      "name": "National Hero",
+      "icon": "http://www.crazyimage.com",
+      "pointValue": 500,
       "pointAward": true,
       "numSaved": null
     }
@@ -125,7 +160,7 @@
   ],
   "scenarios": [
     {
-      "name": "School Shooting"
+      "name": "House Fire"
     }
   ],
   "users": [
