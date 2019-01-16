@@ -132,7 +132,7 @@ class Menu extends React.Component {
             </div>
           </div>
 
-          <Link className='btn btn-primary btn-lg center-block' to='/game/1'>Keep Your Friend Alive During A Shooting</Link>
+          <Link className='btn btn-primary btn-lg center-block' to='/game/1'>Save your friend during a house fire!</Link>
           <Link className='btn btn-primary center-block hidden' to='/game/2'>Burning Building</Link>
           <button className='btn btn-danger center-block' onClick={logoutClickEvent}>Logout</button>
           <h2>Awards</h2>
