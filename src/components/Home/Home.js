@@ -7,7 +7,7 @@ class Home extends React.Component {
       <div className='Home'>
         <div className="jumbotron">
           <h1>Friend Savior</h1>
-          <p>Save your friends in this exciting game by testing your medical first-aid skills!</p>
+          <p>Save your friends in this exciting game with your quick decision-making!</p>
           <p><Link className='btn btn-lg btn-primary' to='/login'>Login</Link></p>
           <p>Or</p>
           <p><Link to='/register' className='btn btn-lg btn-success'>Register</Link></p>
