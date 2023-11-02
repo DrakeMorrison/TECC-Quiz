@@ -63,8 +63,6 @@
 2. Type 'npm install' to download required dependencies.
 3. Type 'npm start' to start a local server with the application.
 ```
-### Demo:
-[Preview the project here.](https://friend-savior.firebaseapp.com/)
 
 
 
